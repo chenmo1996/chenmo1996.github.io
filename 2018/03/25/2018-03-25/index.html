@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Dekura&#39;s Blog">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Hybird 初探 | Dekura
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Dekura</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Hybird 初探</h2>
+  <p class="post-date">2018-03-25</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>简单探索一下混合开发的Hybird模式<br><img src="http://osmisz4zw.bkt.clouddn.com/15219848586038.jpg" alt=""></p>
+<a id="more"></a>
+<h1 id="Hybird初探"><a href="#Hybird初探" class="headerlink" title="Hybird初探"></a>Hybird初探</h1><h3 id="hybird是什么，为什么会使用hybird"><a href="#hybird是什么，为什么会使用hybird" class="headerlink" title="hybird是什么，为什么会使用hybird"></a>hybird是什么，为什么会使用hybird</h3><ul>
+<li>文字解释<br>混合，需要前端开发人员和客户端开发人员配合完成<br>某些环节可能涉及到server端<br>PS：不要以为自己会前端就不用会客户端</li>
+</ul>
+<p>页面web前端和客户端混合。</p>
+<ul>
+<li>存在价值</li>
+</ul>
+<p>可以快速迭代，不需要app审核。<br>体验流程：和NA的体验基本类似<br>减少开发和沟通成本，双端公用一套代码</p>
+<ul>
+<li>webView</li>
+</ul>
+<p>是app的一个组件，用于加载web页面</p>
+<ul>
+<li><p>file://协议<br>刚开始写的时候就已经使用了file协议了。<br>协议和标准都是非常重要的！！！<br>使用file协议加载静态文件。</p>
+</li>
+<li><p>流量</p>
+</li>
+</ul>
+<h3 id="开发流程"><a href="#开发流程" class="headerlink" title="开发流程"></a>开发流程</h3><p>使用版本号鸡儿对应的服务包</p>
+<p>分版本号，压缩zip，每次启动都去检查服务端版本号</p>
+<p>解压包然后使用</p>
+<h3 id="hybird和h5的区别"><a href="#hybird和h5的区别" class="headerlink" title="hybird和h5的区别"></a>hybird和h5的区别</h3><p>有点缺点适用场景</p>
+<p>优点：<br>体验号，速度快，不用等待审核</p>
+<p>缺点：<br>开发成本高，联调，测试，查bug都比较麻烦<br>运维成本高</p>
+<h3 id="适用的场景"><a href="#适用的场景" class="headerlink" title="适用的场景"></a>适用的场景</h3><p>产品稳定，体验要求高，迭代频繁</p>
+<h3 id="前端和客户端通讯"><a href="#前端和客户端通讯" class="headerlink" title="前端和客户端通讯"></a>前端和客户端通讯</h3><ul>
+<li>回顾之前的遗留问题<br>不能使用ajax获取，第一，跨域，第二，速度慢<br>客户端获取新闻内容，然后js通讯拿到内容，再渲染。</li>
+</ul>
+<p>hybird就是快</p>
+<p>参数加上callback，类似jsonp<br><img src="http://osmisz4zw.bkt.clouddn.com/15219656637234.jpg" alt=""></p>
+<p>具体如何实现的。</p>
+<ul>
+<li>JS和客户端通讯的基本形式</li>
+</ul>
+<ul>
+<li>schema协议简介和使用</li>
+</ul>
+<p>网上搜到的微信schema协议</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">weixin://dl/scan</span><br></pre></td></tr></table></figure>
+<p>协议简介和使用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>[<span class="string">'_weixin_scan_callback'</span>] = <span class="function"><span class="keyword">function</span>(<span class="params">result</span>)</span>&#123;</span><br><span class="line">    alert(result)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">iframe.src = <span class="string">'weixin:dl/scan?k1=v1&amp;callback=_weixin_scan_callback'</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>schema使用的封装</li>
+</ul>
+<p>内置上线：<br>将以上封装的代码打包，叫做invoke.js,内置到客户端</p>
+<p>本地加载，没有网络请求，黑客看不到schema协议，更加安全。</p>
+<h3 id="前端js如何和客户端通讯"><a href="#前端js如何和客户端通讯" class="headerlink" title="前端js如何和客户端通讯"></a>前端js如何和客户端通讯</h3><p>通讯的基本形式：调用能力，传递参数，监听回调<br>对schema协议的理解和使用<br>调用schema代码的封装<br>内置上线</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>hybird混合开发<br>hybird的更新和上线的流程<br>hybird实现流程：webview和file协议</p>
+<p>file协议和schema协议</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#面试准备" >
+    <span class="tag-code">面试准备</span>
+  </a>
+
+  <a href="/tags#技术分享" >
+    <span class="tag-code">技术分享</span>
+  </a>
+
+  <a href="/tags#语言基础" >
+    <span class="tag-code">语言基础</span>
+  </a>
+
+  <a href="/tags#框架原理" >
+    <span class="tag-code">框架原理</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2018/03/24/2018-03-24/">
+        <span class="nav-arrow">← </span>
+        
+          深入理解React 高阶组件
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2018/03/25/2018-03-25-1/">
+        
+          自己动手实现vue双向绑定
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- Gitment START -->
+      <div id="comments"></div>
+      <!-- Gitment END -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#Hybird初探"><span class="toc-nav-text">Hybird初探</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#hybird是什么，为什么会使用hybird"><span class="toc-nav-text">hybird是什么，为什么会使用hybird</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#开发流程"><span class="toc-nav-text">开发流程</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#hybird和h5的区别"><span class="toc-nav-text">hybird和h5的区别</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#适用的场景"><span class="toc-nav-text">适用的场景</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#前端和客户端通讯"><span class="toc-nav-text">前端和客户端通讯</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#前端js如何和客户端通讯"><span class="toc-nav-text">前端js如何和客户端通讯</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#总结"><span class="toc-nav-text">总结</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://dekura.github.io/2018/03/25/2018-03-25/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+        
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+
+    // gitment
+    var gitmentConfig = "dekura";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "Hybird 初探",
+        owner: "dekura",
+        repo: "dekura.github.io",
+        oauth: {
+          client_id: "97e1d6e9653a91635905",
+          client_secret: "97ec9074518f7f02d092d022183c6ba6effbb2c1"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2018 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>

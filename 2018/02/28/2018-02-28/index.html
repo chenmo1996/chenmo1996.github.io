@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Dekura&#39;s Blog">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      MDN学习笔记 | Dekura
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Dekura</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>MDN学习笔记</h2>
+  <p class="post-date">2018-02-28</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>MDN学习笔记  </p>
+<p><img src="http://osmisz4zw.bkt.clouddn.com/20180228151981483241384.jpg" alt="20180228151981483241384.jpg"><br><a id="more"></a></p>
+<h1 id="MDN学习笔记"><a href="#MDN学习笔记" class="headerlink" title="MDN学习笔记"></a>MDN学习笔记</h1><h3 id="JavaScript简介"><a href="#JavaScript简介" class="headerlink" title="JavaScript简介"></a>JavaScript简介</h3><ol>
+<li>JavaScript 的标准是 ECMAScript 。截至 2012 年，所有的现代浏览器都完整了支持  ECMAScript 5.1，旧式的浏览器至少支持 ECMAScript 3 标准。2015年6月17日，ECMA国际组织发布了 ECMAScript 的第六版，该版本正式名称为ECMAScript 2015，但通常被称为 ECMAScript 6 或者ES6。自此，ECMAScript每年发布一次新标准。本文档目前覆盖了最新ECMAScript的草案，也就是ECMAScript2018。</li>
+</ol>
+<h3 id="JavaScript起步"><a href="#JavaScript起步" class="headerlink" title="JavaScript起步"></a>JavaScript起步</h3><p>JavaScript 语言的核心包含一些普遍的编程特点，以让你可以做到如下的事情：</p>
+<ul>
+<li>在变量中储存有用的值。以上面的演示做例子，我们请求输入一个新的名字，然后把那个名字储存到一个叫 name 的变量.</li>
+<li>对一段文本（在编程中被称为“字符串”）进行操作。在上面的例子中，我们取出字符串 “Player 1: “，然后把它和 name 变量连结起来，创造出完整的文本标签，例：’’Player 1: Chris”。</li>
+<li>运行代码以响应在网页中发生的特定事件。在上述的例子中，我们用了一个 click 事件来检测按钮什么时候被点击，然后运行更新文本标签的代码。</li>
+<li>以及更多！</li>
+</ul>
+<p>两大类API</p>
+<ol>
+<li>浏览器 APIs (Browser APIs) 已经安装在你的网页浏览器中，而且能够从周围的计算机环境中揭露数据，或者做有用的复杂事情。举个例子：</li>
+</ol>
+<ul>
+<li>文档对象模型 API [DOM (Document Object Model) API] 允许你操作 HTML 和 CSS，创建，移除和修改 HTML，动态地应用新的样式到你的页面，等等。比如说每次你在一个页面里看到一个弹出窗口，或者显示一些新的内容（像我们在上面的简单演示中看到那样），这就是 DOM 在运作。</li>
+<li>地理定位 API [Geolocation API] 获取地理信息。这就是为什么谷歌地图 [Google Maps] 可以找到你的位置，而且标示在地图上。</li>
+<li>画布 [Canvas] 和 WebGL APIs 允许你创建生动的 2D 和 3D 图像。人们正运用这些网页技术进行一些令人惊叹的事情——比如说 Chrome Experiments 和 webglsamples。</li>
+<li>音像和影像 APIs [Audio and Video APIs]，像 HTMLMediaElement 和 WebRTC 允许你运用多媒体去做一些非常有趣的事情，比如在网页中播放音像和影像，或者从你的网页摄像头中获取获取录像，然后在其他人的电脑上展示（尝试我们的简单快照演示 [Snapshot demo] 以理解这个概念）。</li>
+</ul>
+<ol start="2">
+<li>第三方 APIs (Third party APIs) 默认是没有安装到浏览器中的，而你通常需要从网络上的某些地方取得它们的代码和信息。举个例子：</li>
+</ol>
+<ul>
+<li>推特 API [Twitter API] 允许你做一些像是在你的网站上展示你的最新推送之类的事情。</li>
+<li>谷歌地图 API [Google Maps API] 允许你去嵌入定制的地图到你的网站，和其他的功能。</li>
+</ul>
+<h3 id="JavaScript运行顺序"><a href="#JavaScript运行顺序" class="headerlink" title="JavaScript运行顺序"></a>JavaScript运行顺序</h3><p>当浏览器遇到一块 JavaScript 代码时，它通常会按顺序运行这代码块，从上往下。这意味着你需要注意你放置代码的顺序。举个例子，让我们回到我们在第一个例子中看到的 JavaScript 代码块：</p>
+<p>解释代码 vs 编译代码</p>
+<p>在编程环境中，你或许听说过这两个术语 解释 [interpreted] 和 编译 [compiled]。JavaScript 是一个解释语言——代码从上到下运行，而运行的结果会马上被返回。在浏览器运行代码前，你不必先把它转化为其他形式。</p>
+<p>另一方面来说，编译语言则需要在运行前转化为另一种形式。比如说 C/C++ 则要先被编译成汇编语言，然后再由电脑运行。</p>
+<p>两种方式都有不同的优势，然而就目前而言，我们不会谈论这些。</p>
+<p>这个演示有着跟前两节的演示一模一样的功能，除了 <code>&lt;button&gt;</code> 元素中包含了一个内联的 onclick 处理器以至于函数会在按钮被按下时运行。<br>然而请不要这样做。 这是一个用 JavaScript 来污染你的 HTML 的坏实践，而且它还不高效——你会需要在每个想要 JavaScript 应用到的按钮上包含 onclick=”createParagraph()” 属性。</p>
+<h3 id="运算符："><a href="#运算符：" class="headerlink" title="运算符："></a>运算符：</h3><p> + - * /</p>
+<h3 id="调试和检错"><a href="#调试和检错" class="headerlink" title="调试和检错"></a>调试和检错</h3><p>错误类型</p>
+<ul>
+<li><p>语法错误：这是您的代码的拼写错误，实际上导致程序不能运行在所有或停止通过工作的一部分，这样您通常会用一些提供的错误消息找到修复的方法，只要您熟悉正确的工具，知道错误消息的意思！</p>
+</li>
+<li><p>逻辑错误：这些错误，其中语法实际上是正确的，但代码是不是你想要的，这意味着项目成功运行，但会产生不正确的结果。这些通常比语法错误更难以修复，因为通常没有错误指向错误源。</p>
+</li>
+</ul>
+<h3 id="例子–-猜数字游戏"><a href="#例子–-猜数字游戏" class="headerlink" title="例子– 猜数字游戏"></a>例子– 猜数字游戏</h3><p>运算符（Operators）</p>
+<h3 id="变量类型"><a href="#变量类型" class="headerlink" title="变量类型"></a>变量类型</h3><p>Number String Boolean Array  Object</p>
+<h3 id="松散类型"><a href="#松散类型" class="headerlink" title="松散类型"></a>松散类型</h3><h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3><p>index方法可以返回子串的位置</p>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><ol>
+<li>函数内部的函数</li>
+</ol>
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><h3 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h3><p>事件对象</p>
+<h3 id="事件冒泡及捕获"><a href="#事件冒泡及捕获" class="headerlink" title="事件冒泡及捕获"></a>事件冒泡及捕获</h3><p>对事件冒泡和捕捉的解释<br>当一个事件发生在具有父元素的元素上(例如，在我们的例子中是<video>元素)时，现代浏览器运行两个不同的阶段 - 捕获阶段和冒泡阶段。 在捕获阶段：</video></p>
+<p>浏览器检查元素的最外层祖先<html>，是否在捕获阶段中注册了一个onclick事件处理程序，如果是，则运行它。<br>然后，它移动到<html>中的下一个元素，并执行相同的操作，然后是下一个元素，依此类推，直到到达实际点击的元素。<br>在冒泡阶段，恰恰相反:</html></html></p>
+<p>浏览器检查实际点击的元素是否在冒泡阶段中注册了一个onclick事件处理程序，如果是，则运行它<br>然后它移动到下一个直接的祖先元素，并做同样的事情，然后是下一个，等等，直到它到达<html>元素。</html></p>
+<p>(单击图片可以放大这个图表)</p>
+<h3 id="现代机制"><a href="#现代机制" class="headerlink" title="现代机制"></a>现代机制</h3><p>在现代浏览器中，默认情况下，所有事件处理程序都在冒泡阶段进行注册。因此，在我们当前的示例中，当您单击视频时，这个单击事件从 <video>元素向外冒泡直到<html>元素。沿着这个事件冒泡线路：</html></video></p>
+<p>它发现了video.onclick…事件处理器并且运行它，因此这个视频<video>第一次开始播放。<br>接着它发现了（往外冒泡找到的） videoBox.onclick…事件处理器并且运行它，因此这个视频<video>也隐藏起来了。</video></video></p>
+<p>用stopPropagation()修复问题</p>
+<h3 id="对象机制"><a href="#对象机制" class="headerlink" title="对象机制"></a>对象机制</h3><ol>
+<li>工厂模式：函数本身就是个对象</li>
+<li>Object()构造函数</li>
+<li>Object.create()方法</li>
+</ol>
+<h3 id="对象原型"><a href="#对象原型" class="headerlink" title="对象原型"></a>对象原型</h3><p>通过原型这种机制，JavaScript 中的对象从其他对象继承功能特性；这种继承机制与经典的面向对象编程语言的继承机制不同。本文将探讨这些差别，解释原型链如何工作，并了解如何通过 prototype 属性向已有的构造器添加方法</p>
+<p>在传统的 OOP 中，首先定义“类”，此后创建对象实例时，类中定义的所有属性和方法都被复制到实例中。在 JavaScript 中并不如此复制——而是在对象实例和它的构造器之间建立一个链接（它是<strong>proto</strong>属性，是从构造函数的prototype属性派生的），之后通过上溯原型链，在构造器中找到这些属性和方法。</p>
+<p>注意: 理解对象的原型（可以通过Object.getPrototypeOf(obj)或者已被弃用的<strong>proto</strong>属性获得）与构造函数的prototype属性之间的区别是很重要的。前者是每个实例上都有的属性，后者是构造函数的属性。也就是说，Object.getPrototypeOf(new Foobar())和Foobar.prototype指向着同一个对象。</p>
+<h3 id="prototype"><a href="#prototype" class="headerlink" title="prototype"></a>prototype</h3><p>prototype 属性：继承成员被定义的地方。<br>Object有些方法是自有的而有些方法是可以继承的。<br>所以要使用prototype来确定哪些可以继承。</p>
+<p>重要：prototype 属性大概是 JavaScript 中最容易混淆的名称之一。你可能会认为，这个属性指向当前对象的原型对象，其实不是（还记得么？原型对象是一个内部对象，应当使用 <strong>proto</strong> 访问）。prototype 属性包含（指向）一个对象，你在这个对象中定义需要被继承的成员。</p>
+<h3 id="create"><a href="#create" class="headerlink" title="create()"></a>create()</h3><p>我们曾经讲过如何用 Object.create() 方法创建新的对象实例。</p>
+<p>例如，在上个例子的 JavaScript 控制台中输入：<br>var person2 = Object.create(person1);<br>create() 实际做的是从指定原型对象创建一个新的对象。这里以 person1 为原型对象创建了 person2 对象。在控制台输入：<br>person2.<strong>proto</strong><br>结果返回 person1 对象。</p>
+<h3 id="constructor-属性"><a href="#constructor-属性" class="headerlink" title="constructor 属性"></a>constructor 属性</h3><p>常见方法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 构造器及其属性定义</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Test</span>(<span class="params">a,b,c,d</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 属性定义</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义第一个方法</span></span><br><span class="line"></span><br><span class="line">Test.prototype.x = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; ... &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义第二个方法</span></span><br><span class="line"></span><br><span class="line">Test.prototype.y = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; ... &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 等等……</span></span><br></pre></td></tr></table></figure>
+<h3 id="原型式的继承"><a href="#原型式的继承" class="headerlink" title="原型式的继承"></a>原型式的继承</h3><h4 id="call（）函数"><a href="#call（）函数" class="headerlink" title="call（）函数"></a>call（）函数</h4><p>LZ要先明白存在call和apply的原因，才能记得牢一点：    在javascript OOP中，我们经常会这样定义：     function cat(){}cat.prototype={     food:”fish”,     say: function(){           alert(“I love “+this.food);     }}var blackCat = new cat;blackCat.say(); 但是如果我们有一个对象whiteDog = {food:”bone”},我们不想对它重新定义say方法，那么我们可以通过call或apply用blackCat的say方法：blackCat.say.call(whiteDog);所以，可以看出call和apply是为了动态改变this而出现的，当一个object没有某个方法，但是其他的有，我们可以借助call或apply用其它对象的方法来操作。</p>
+<p>作者：杨志<br>链接：<a href="https://www.zhihu.com/question/20289071/answer/14644278" target="_blank" rel="noopener">https://www.zhihu.com/question/20289071/answer/14644278</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<p>本身不难理解，看下MDN就知道了，但是不常用，遇到了，还要脑回路回转下。或者时间长了，还是要确定下去看下文档，为了方便记忆：猫吃鱼，狗吃肉，奥特曼打小怪兽。有天狗想吃鱼了猫.吃鱼.call(狗，鱼)狗就吃到鱼了猫成精了，想打怪兽奥特曼.打小怪兽.call(猫，小怪兽)就这样记住了。</p>
+<p>作者：寇云<br>链接：<a href="https://www.zhihu.com/question/20289071/answer/258643285" target="_blank" rel="noopener">https://www.zhihu.com/question/20289071/answer/258643285</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<h3 id="从无参构造函数继承"><a href="#从无参构造函数继承" class="headerlink" title="从无参构造函数继承"></a>从无参构造函数继承</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">BlueGlassBrick</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  Brick.call(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">this</span>.opacity = <span class="number">0.5</span>;</span><br><span class="line">  <span class="keyword">this</span>.color = <span class="string">'blue'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="设置-Teacher-的原型和构造器引用"><a href="#设置-Teacher-的原型和构造器引用" class="headerlink" title="设置 Teacher() 的原型和构造器引用"></a>设置 Teacher() 的原型和构造器引用</h3><p>到目前为止一切看起来都还行，但是我们遇到问题了。我们已经定义了一个新的构造器，这个构造器默认有一个空的原型属性。我们需要让Teacher()从Person()的原型对象里继承方法。我们要怎么做呢？<br> 两板斧</p>
+<ul>
+<li><code>Teacher.prototype = Object.create(Person.prototype);</code></li>
+<li><code>Teacher.prototype.constructor = Teacher;</code></li>
+</ul>
+<h3 id="对象成员总结"><a href="#对象成员总结" class="headerlink" title="对象成员总结"></a>对象成员总结</h3><p>总结一下，您应该基本了解了以下三种属性或者方法：</p>
+<p>那些定义在构造器函数中的、用于给予对象实例的。这些都很容易发现 - 在您自己的代码中，它们是构造函数中使用this.x = x类型的行；在内置的浏览器代码中，它们是可用于对象实例的成员（通常通过使用new关键字调用构造函数来创建，例如var myInstance = new myConstructor()）。<br>那些直接在构造函数上定义、仅在构造函数上可用的。这些通常仅在内置的浏览器对象中可用，并通过被直接链接到构造函数而不是实例来识别。 例如Object.keys()。<br>那些在构造函数原型上定义、由所有实例和对象类继承的。这些包括在构造函数的原型属性上定义的任何成员，如myConstructor.prototype.x()。<br>如果您现在觉得一团浆糊，别担心——您现在还处于学习阶段，不断练习才会慢慢熟悉这些知识。</p>
+<h3 id="何时在-JavaScript-中使用继承？"><a href="#何时在-JavaScript-中使用继承？" class="headerlink" title="何时在 JavaScript 中使用继承？"></a>何时在 JavaScript 中使用继承？</h3><p>总之，对象是另一种形式的代码重用，就像函数和循环一样，有他们特定的角色和优点。如果您发现自己创建了一堆相关的变量和函数，还想一起追踪它们并将其灵活打包的话，对象是个不错的主意。对象在您打算把一个数据集合从一个地方传递到另一个地方的时候非常有用。这些都可以在不使用构造器和继承的情况下完成。如果您只是需要一个单一的对象实例，也许使用对象常量会好些，您当然不需要使用继承。</p>
+<h3 id="客户端-Web-API"><a href="#客户端-Web-API" class="headerlink" title="客户端 Web API"></a>客户端 Web API</h3><h3 id="文档对象模型-DOM"><a href="#文档对象模型-DOM" class="headerlink" title="文档对象模型 DOM"></a>文档对象模型 DOM</h3><h3 id="从服务器获取数据"><a href="#从服务器获取数据" class="headerlink" title="从服务器获取数据"></a>从服务器获取数据</h3><h3 id="基本的Ajax请求"><a href="#基本的Ajax请求" class="headerlink" title="基本的Ajax请求"></a>基本的Ajax请求</h3><h3 id="深入理解JavaScript"><a href="#深入理解JavaScript" class="headerlink" title="深入理解JavaScript"></a>深入理解JavaScript</h3><ul>
+<li>Number（数字）</li>
+<li>String（字符串）</li>
+<li>Boolean（布尔）</li>
+<li>Symbol（符号）（第六版新增）</li>
+<li>Object（对象）<ul>
+<li>Function（函数）</li>
+<li>Array（数组）</li>
+<li>Date（日期）</li>
+<li>RegExp（正则表达式）</li>
+</ul>
+</li>
+<li>Null（空）</li>
+<li>Undefined（未定义）</li>
+</ul>
+<p>BUSSNN</p>
+<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><blockquote>
+<p>闭包是函数和声明该函数的词法环境的组合。</p>
+</blockquote>
+<p>一个闭包就是一个函数和被创建的函数中的作用域对象的组合。</p>
+<p>闭包允许你保存状态——所以它们通常可以代替对象来使用。这里有一些关于闭包的详细介绍。</p>
+<p>所以当调用 makeAdder 时，解释器创建了一个作用域对象，它带有一个属性：a，这个属性被当作参数传入 makeAdder 函数。然后 makeAdder 返回一个新创建的函数。通常 JavaScript 的垃圾回收器会在这时回收 makeAdder 创建的作用域对象，但是返回的函数却保留一个指向那个作用域对象的引用。结果是这个作用域对象不会被垃圾回收器回收，直到指向 makeAdder 返回的那个函数对象的引用计数为零。</p>
+<p>作用域对象组成了一个名为作用域链（scope chain）的链。它类似于原型（prototype）链一样，被 JavaScript 的对象系统使用。</p>
+<h3 id="内存泄露"><a href="#内存泄露" class="headerlink" title="内存泄露"></a>内存泄露</h3><p>典型的内存泄露</p>
+<p>元素的引用被放在了一个函数中的内部匿名函数中</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addHandler</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> el = <span class="built_in">document</span>.getElementById(<span class="string">'el'</span>);</span><br><span class="line">    el.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        el.style.backgroundColor = <span class="string">'red'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>解决方法</p>
+<p>不使用el变量</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addHandler</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">document</span>.getElementById(<span class="string">'el'</span>).onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.style.backgroundColor = <span class="string">'red'</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h4><p>JavaScript中的函数会形成闭包。 闭包是由函数以及创建该函数的词法环境组合而成。这个环境包含了这个闭包创建时所能访问的所有局部变量。在我们的例子中，myFunc 是执行 makeFunc 时创建的 displayName 函数实例的引用，而 displayName 实例仍可访问其词法作用域中的变量，即可以访问到 name 。由此，当 myFunc 被调用时，name 仍可被访问，其值 Mozilla 就被传递到alert中。</p>
+<p>例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeFunc</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name = <span class="string">"Mozilla"</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">displayName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        alert(name);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> displayName;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> myFunc = makeFunc();</span><br><span class="line">myFunc();</span><br></pre></td></tr></table></figure>
+<h3 id="实用的闭包"><a href="#实用的闭包" class="headerlink" title="实用的闭包"></a>实用的闭包</h3><ol>
+<li>用闭包模拟只有一个方法的对象</li>
+</ol>
+<p>闭包很有用，因为他允许将函数与其所操作的某些数据（环境）关联起来。这显然类似于面向对象编程。在面向对象编程中，对象允许我们将某些数据（对象的属性）与一个或者多个方法相关联。</p>
+<p>因此，通常你使用只有一个方法的对象的地方，都可以使用闭包。</p>
+<p>在 Web 中，你想要这样做的情况特别常见。大部分我们所写的 JavaScript 代码都是基于事件的 — 定义某种行为，然后将其添加到用户触发的事件之上（比如点击或者按键）。我们的代码通常作为回调：为响应事件而执行的函数。</p>
+<ol start="2">
+<li>用闭包模拟私有方法</li>
+</ol>
+<p>简单来说闭包就是词法环境和对应函数，只要通过return返回的函数中可以访问闭包中的变量，那么这个变量就不会被销毁。</p>
+<p>以这种方式使用闭包，提供了许多与面向对象编程相关的好处 —— 特别是数据隐藏和封装。</p>
+<h3 id="在循环中创建闭包：一个常见错误"><a href="#在循环中创建闭包：一个常见错误" class="headerlink" title="在循环中创建闭包：一个常见错误"></a>在循环中创建闭包：一个常见错误</h3><p>最常见的判断闭包的方法就是：匿名函数中有函数。</p>
+<h3 id="性能考量"><a href="#性能考量" class="headerlink" title="性能考量"></a>性能考量</h3><p>如果不是某些特定任务需要使用闭包，在其它函数中创建函数是不明智的，因为闭包在处理速度和内存消耗方面对脚本性能具有负面影响。</p>
+<h3 id="最佳定义对象的方法"><a href="#最佳定义对象的方法" class="headerlink" title="最佳定义对象的方法"></a>最佳定义对象的方法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyObject</span>(<span class="params">name, message</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name.toString();</span><br><span class="line">  <span class="keyword">this</span>.message = message.toString();</span><br><span class="line">&#125;</span><br><span class="line">MyObject.prototype.getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">&#125;;</span><br><span class="line">MyObject.prototype.getMessage = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.message;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><ol>
+<li>动态类型</li>
+</ol>
+<p>最新的 ECMAScript 标准定义了 7 种数据类型:</p>
+<p>6 种 原始类型:</p>
+<ul>
+<li>Boolean</li>
+<li>Null</li>
+<li>Undefined</li>
+<li>Number</li>
+<li>String</li>
+<li><p>Symbol (ECMAScript 6 新定义)</p>
+</li>
+<li><p>和 Object</p>
+</li>
+</ul>
+<p>在 JavaScript 编程中，对于参数传递、构造函数带return时系统的判断等，需要进行区分的数值类型为：</p>
+<p>1、值类型：即5种基本类型（string,number,boolean,null,undefined）；</p>
+<p>2、引用类型：即数组、函数、对象共三种。这三种类型的处理与值类型会有很大的差别。</p>
+<h3 id="例1：-JavaScript-构造函数带有return语句"><a href="#例1：-JavaScript-构造函数带有return语句" class="headerlink" title="例1： JavaScript 构造函数带有return语句"></a>例1： JavaScript 构造函数带有return语句</h3><p>构造函数中带有return语句，如果return的是：</p>
+<ul>
+<li>值类型，那么构造函数会忽略掉这个值，返回构造的新对象；</li>
+<li>引用类型(数组、函数、对象)，那么构造函数就会直接返回该引用类型；</li>
+</ul>
+<p>构造函数用于创建对象，不建议在构造函数内使用return语句。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 因为Super1返回的 123 是值类型，它被丢弃，直接返回构造对象</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Super1</span>(<span class="params">a</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.a=a;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">123</span>;          <span class="comment">// 将return语句注释掉也没影响</span></span><br><span class="line">&#125;</span><br><span class="line">Super1.prototype.sayHello=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"Hello"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> Super1(<span class="number">1</span>));</span><br><span class="line"></span><br><span class="line"><span class="comment">// Super2直接返回了对象，而前面构造函数的所有操作全被丢弃</span></span><br><span class="line"><span class="comment">// 包括它的构造函数、原型链全部都没有返回</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Super2</span>(<span class="params">a</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.a=a;</span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="attr">a</span>:<span class="number">2</span>&#125;;</span><br><span class="line">&#125;</span><br><span class="line">Super2.prototype.sayHello=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"Hello"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">new</span> Super2(<span class="number">3</span>));</span><br></pre></td></tr></table></figure>
+<h3 id="例2-JavaScript-函数的参数传递"><a href="#例2-JavaScript-函数的参数传递" class="headerlink" title="例2 :  JavaScript 函数的参数传递"></a>例2 :  JavaScript 函数的参数传递</h3><p>JavaScript 采用一种参数传递策略，叫按共享传递。这要取决于参数的类型。</p>
+<ul>
+<li>如果参数是基本类型，那么是按值传递的；</li>
+<li>如果参数是引用类型，那么是按共享传递的。</li>
+</ul>
+<p>“按共享传递”是“按值传递的特殊情况”- - 值是对象存储地址的副本（address copy）。一句话概括“按共享传递”特点：<strong>改属性不改对象</strong>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>、按值传递（call by value）</span><br><span class="line"></span><br><span class="line"><span class="comment">//函数内部参数的改变并没有影响到外部变量</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">      a = a * <span class="number">10</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> num = <span class="number">10</span>;</span><br><span class="line">foo(num);</span><br><span class="line"><span class="built_in">console</span>.log(num);                <span class="comment">// 10  没有变化</span></span><br><span class="line"></span><br><span class="line"><span class="number">2</span>、按共享传递（call by sharing）</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params">b</span>) </span>&#123;</span><br><span class="line">    b.item = <span class="string">"new_value"</span>;         <span class="comment">// 参数b得到了obj1的地址，也叫"指向obj1"</span></span><br><span class="line">    <span class="built_in">console</span>.log(b === obj1) ;     <span class="comment">// true</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj1 = &#123;<span class="attr">item</span>: <span class="string">"old_value"</span>&#125;;</span><br><span class="line">bar(obj1);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(obj1.item);            <span class="comment">// new_value</span></span><br></pre></td></tr></table></figure>
+<h3 id="对ES6的支持"><a href="#对ES6的支持" class="headerlink" title="对ES6的支持"></a>对ES6的支持</h3><h1 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h1><p>Hypertext Markup Language，简称：HTML</p>
+<h3 id="什么是Head标签"><a href="#什么是Head标签" class="headerlink" title="什么是Head标签?"></a>什么是Head标签?</h3><p>head 标签是 <head> 元素的内容。不像 </head><body> 元素的内容可以显示在浏览器中，head 的内容不会在浏览器中显示，它的作用是包含一些页面的元数据。在下面的例子中，head 的内容很少。</body></p>
+<h4 id="元数据：元素"><a href="#元数据：元素" class="headerlink" title="元数据：元素"></a>元数据：<meta>元素</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"author"</span> <span class="attr">content</span>=<span class="string">"Chris Mills"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"description"</span> <span class="attr">content</span>=<span class="string">"The MDN Learning Area aims to provide</span></span></span><br><span class="line"><span class="tag"><span class="string">complete beginners to the Web with all they need to know to get</span></span></span><br><span class="line"><span class="tag"><span class="string">started with developing web sites and applications."</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Facebook 编写的元数据协议 Open Graph Data 为网站提供了更丰富的元数据。在 MDN 源代码中，你会发现：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">"og:image"</span> <span class="attr">content</span>=<span class="string">"https://developer.cdn.mozilla.net/static/img/opengraph-logo.dc4e08e2f6af.png"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">"og:description"</span> <span class="attr">content</span>=<span class="string">"The Mozilla Developer Network (MDN) provides</span></span></span><br><span class="line"><span class="tag"><span class="string">information about Open Web technologies including HTML, CSS, and APIs for both Web sites</span></span></span><br><span class="line"><span class="tag"><span class="string">and HTML5 Apps. It also documents Mozilla products, like Firefox OS."</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">property</span>=<span class="string">"og:title"</span> <span class="attr">content</span>=<span class="string">"Mozilla Developer Network"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="在你的站点增加自定义图标"><a href="#在你的站点增加自定义图标" class="headerlink" title="在你的站点增加自定义图标"></a>在你的站点增加自定义图标</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"shortcut icon"</span> <span class="attr">href</span>=<span class="string">"favicon.ico"</span> <span class="attr">type</span>=<span class="string">"image/x-icon"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="添加CSS"><a href="#添加CSS" class="headerlink" title="添加CSS"></a>添加CSS</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"my-css-file.css"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en-US"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="为什么我们需要结构化"><a href="#为什么我们需要结构化" class="headerlink" title="为什么我们需要结构化?"></a>为什么我们需要结构化?</h4><ol>
+<li>对用户好</li>
+<li>利于浏览器识别</li>
+<li>利于搜索引擎优化</li>
+<li>可以使用CSS和JavaScript做一些事情</li>
+</ol>
+<h3 id="统一资源定位器-URL-与路径-path-快速入门"><a href="#统一资源定位器-URL-与路径-path-快速入门" class="headerlink" title="统一资源定位器(URL)与路径(path)快速入门"></a>统一资源定位器(URL)与路径(path)快速入门</h3><p>Uniform Resource Locator，URL</p>
+<h1 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h1><h3 id="CSS-实际上如何工作？"><a href="#CSS-实际上如何工作？" class="headerlink" title="CSS 实际上如何工作？"></a>CSS 实际上如何工作？</h3><p><img src="http://osmisz4zw.bkt.clouddn.com/15199533430820.jpg" alt=""></p>
+<h4 id="属性选择器"><a href="#属性选择器" class="headerlink" title="属性选择器"></a>属性选择器</h4><p>属性选择器是一种特殊类型的选择器，它根据元素的 属性和属性值来匹配元素。它们的通用语法由方括号([]) 组成，其中包含属性名称，后跟可选条件以匹配属性的值。 属性选择器可以根据其匹配属性值的方式分为两类： 存在和值属性选择器和子串值属性选择器。</p>
+<h4 id="伪类和伪元素"><a href="#伪类和伪元素" class="headerlink" title="伪类和伪元素"></a>伪类和伪元素</h4><p>:hover<br>::afer</p>
+<h4 id="盒模型"><a href="#盒模型" class="headerlink" title="盒模型"></a>盒模型</h4><p>overflow<br>background-clip</p>
+<h3 id="CSS-layout"><a href="#CSS-layout" class="headerlink" title="CSS layout"></a>CSS layout</h3><h4 id="浮动："><a href="#浮动：" class="headerlink" title="浮动："></a>浮动：</h4><p>float是占据文本流的，本意是在图片周围可以设置文本。<br>多列浮动布局<br>清除浮动<br>你会看到页脚在最长的列旁边环绕着，这看起来很糟糕——我们希望页脚保持在底部，在所有的列下面。幸运的是，有一种简单的方法可以解决这个问题—— clear 属性。当你把这个应用到一个元素上时，它主要意味着”此处停止浮动”——这个元素和源码中后面的元素将不浮动，除非您稍后将一个新的float声明应用到此后的另一个元素。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">footer</span> &#123;</span><br><span class="line">  <span class="attribute">clear</span>: both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>解决浮动带来的问题<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">* &#123;</span><br><span class="line">  <span class="attribute">box-sizing</span>: border-box;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>box-sizing 通过更改盒模型来拯救我们，盒子的宽度取值为 content + padding + border，而不仅是之前的content——所以当增加内边距或边界的宽度时，不会使盒子更宽——而是会使内容调整得更窄</p>
+<p>清除浮动会变复杂</p>
+<h4 id="flexbox"><a href="#flexbox" class="headerlink" title="flexbox"></a>flexbox</h4><p><a href="https://developer.mozilla.org/zh-CN/docs/Learn/CSS/CSS_layout/Flexbox" target="_blank" rel="noopener">弹性盒子</a></p>
+<p><img src="http://osmisz4zw.bkt.clouddn.com/15199604809637.png" alt=""></p>
+<p>flex 模型说明<br>flex-direction: row;<br>flex-wrap: wrap;</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">article</span> &#123;</span><br><span class="line">  <span class="attribute">flex</span>: <span class="number">1</span> <span class="number">200px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">article</span><span class="selector-pseudo">:nth-of-type(3)</span> &#123;</span><br><span class="line">  <span class="attribute">flex</span>: <span class="number">2</span> <span class="number">200px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>水平和垂直对齐<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">  <span class="attribute">align-items</span>: center;</span><br><span class="line">  <span class="attribute">justify-content</span>: space-around;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>我的解决方案<br>综合运用方案<br>在网页主要布局时使用:after伪元素方法并作为主要清理浮动方式；在小模块如ul或textwidget里使用overflow:hidden;（留意可能产生的隐藏溢出元素问题）；如果本身就是浮动元素则可自动清除内部浮动，无需格外处理；正文中使用邻接元素清理之前的浮动。</p>
+<p>优点：可以有效降低代码量，使用得当可以完善解决浮动清理问题。<br>缺点：需要熟悉各种清理方式的原理和利弊，需做好注释，否则对日后维护造成不必要的麻烦。</p>
+<p>通过对各种方法的分析，体现出网页重构时除了要对css应用得当并考虑良好的兼容性，还要培养写良好html文档结构的能力。只有html的结构整洁，模块清晰，才能更好的使用css处理布局中遇到的各种问题。</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#面试准备" >
+    <span class="tag-code">面试准备</span>
+  </a>
+
+  <a href="/tags#技术分享" >
+    <span class="tag-code">技术分享</span>
+  </a>
+
+  <a href="/tags#语言基础" >
+    <span class="tag-code">语言基础</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2018/02/28/2018-03-01/">
+        <span class="nav-arrow">← </span>
+        
+          JavaScript Promise 详解
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2018/03/06/2018-03-11/">
+        
+          简单介绍ES6 Generator
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- Gitment START -->
+      <div id="comments"></div>
+      <!-- Gitment END -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#MDN学习笔记"><span class="toc-nav-text">MDN学习笔记</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#JavaScript简介"><span class="toc-nav-text">JavaScript简介</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#JavaScript起步"><span class="toc-nav-text">JavaScript起步</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#JavaScript运行顺序"><span class="toc-nav-text">JavaScript运行顺序</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#运算符："><span class="toc-nav-text">运算符：</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#调试和检错"><span class="toc-nav-text">调试和检错</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#例子–-猜数字游戏"><span class="toc-nav-text">例子– 猜数字游戏</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#变量类型"><span class="toc-nav-text">变量类型</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#松散类型"><span class="toc-nav-text">松散类型</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#String"><span class="toc-nav-text">String</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#函数"><span class="toc-nav-text">函数</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#返回值"><span class="toc-nav-text">返回值</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#事件"><span class="toc-nav-text">事件</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#事件冒泡及捕获"><span class="toc-nav-text">事件冒泡及捕获</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#现代机制"><span class="toc-nav-text">现代机制</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#对象机制"><span class="toc-nav-text">对象机制</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#对象原型"><span class="toc-nav-text">对象原型</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#prototype"><span class="toc-nav-text">prototype</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#create"><span class="toc-nav-text">create()</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#constructor-属性"><span class="toc-nav-text">constructor 属性</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#原型式的继承"><span class="toc-nav-text">原型式的继承</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#call（）函数"><span class="toc-nav-text">call（）函数</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#从无参构造函数继承"><span class="toc-nav-text">从无参构造函数继承</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#设置-Teacher-的原型和构造器引用"><span class="toc-nav-text">设置 Teacher() 的原型和构造器引用</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#对象成员总结"><span class="toc-nav-text">对象成员总结</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#何时在-JavaScript-中使用继承？"><span class="toc-nav-text">何时在 JavaScript 中使用继承？</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#客户端-Web-API"><span class="toc-nav-text">客户端 Web API</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#文档对象模型-DOM"><span class="toc-nav-text">文档对象模型 DOM</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#从服务器获取数据"><span class="toc-nav-text">从服务器获取数据</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#基本的Ajax请求"><span class="toc-nav-text">基本的Ajax请求</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#深入理解JavaScript"><span class="toc-nav-text">深入理解JavaScript</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#闭包"><span class="toc-nav-text">闭包</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#内存泄露"><span class="toc-nav-text">内存泄露</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#定义："><span class="toc-nav-text">定义：</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#实用的闭包"><span class="toc-nav-text">实用的闭包</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#在循环中创建闭包：一个常见错误"><span class="toc-nav-text">在循环中创建闭包：一个常见错误</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#性能考量"><span class="toc-nav-text">性能考量</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#最佳定义对象的方法"><span class="toc-nav-text">最佳定义对象的方法</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#数据类型"><span class="toc-nav-text">数据类型</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#例1：-JavaScript-构造函数带有return语句"><span class="toc-nav-text">例1： JavaScript 构造函数带有return语句</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#例2-JavaScript-函数的参数传递"><span class="toc-nav-text">例2 :  JavaScript 函数的参数传递</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#对ES6的支持"><span class="toc-nav-text">对ES6的支持</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#HTML"><span class="toc-nav-text">HTML</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#什么是Head标签"><span class="toc-nav-text">什么是Head标签?</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#元数据：元素"><span class="toc-nav-text">元数据：元素</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#在你的站点增加自定义图标"><span class="toc-nav-text">在你的站点增加自定义图标</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#添加CSS"><span class="toc-nav-text">添加CSS</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#为什么我们需要结构化"><span class="toc-nav-text">为什么我们需要结构化?</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#统一资源定位器-URL-与路径-path-快速入门"><span class="toc-nav-text">统一资源定位器(URL)与路径(path)快速入门</span></a></li></ol></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#CSS"><span class="toc-nav-text">CSS</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#CSS-实际上如何工作？"><span class="toc-nav-text">CSS 实际上如何工作？</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#属性选择器"><span class="toc-nav-text">属性选择器</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#伪类和伪元素"><span class="toc-nav-text">伪类和伪元素</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#盒模型"><span class="toc-nav-text">盒模型</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#CSS-layout"><span class="toc-nav-text">CSS layout</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#浮动："><span class="toc-nav-text">浮动：</span></a></li><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#flexbox"><span class="toc-nav-text">flexbox</span></a></li></ol></li></ol></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://dekura.github.io/2018/02/28/2018-02-28/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+        
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+
+    // gitment
+    var gitmentConfig = "dekura";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "MDN学习笔记",
+        owner: "dekura",
+        repo: "dekura.github.io",
+        oauth: {
+          client_id: "97e1d6e9653a91635905",
+          client_secret: "97ec9074518f7f02d092d022183c6ba6effbb2c1"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2018 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
