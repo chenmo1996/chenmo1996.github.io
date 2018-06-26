@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Dekura&#39;s Blog">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      如何优雅的提交Git Commit Message | Dekura
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Dekura</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>如何优雅的提交Git Commit Message</h2>
+  <p class="post-date">2018-06-26</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>优雅提交<code>git commit</code>是每一个程序员必经之路<br><img src="http://osmisz4zw.bkt.clouddn.com/15300216785968.jpg" alt=""></p>
+<a id="more"></a>
+<h1 id="如何优雅的提交Git-Commit-Message"><a href="#如何优雅的提交Git-Commit-Message" class="headerlink" title="如何优雅的提交Git Commit Message"></a>如何优雅的提交Git Commit Message</h1><blockquote>
+<p>commit message 是开发的日常操作, 写好 log 不仅有助于他人 review, 还可以有效的输出 CHANGELOG, 对项目的管理实际至关重要, 但是实际工作中却常常被大家忽略.<br>希望通过本文, 能够帮助大家重视和规范 commit message 的书写.</p>
+</blockquote>
+<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>知乎上有个问题: <a href="https://link.juejin.im?target=https%3A%2F%2Fwww.zhihu.com%2Fquestion%2F21209619%2Fanswer%2F257574960" target="_blank" rel="noopener">如何写好 Git commit log?</a>  很有意思, 能看到各种提交风格: 有用 emoji 的, 有用唐诗的, 有用随机生成的. 风格没有对错, 只要能够体现出 commit 所做的修改即可.</p>
+<p>但是最让我印象深刻的是 @李华桥 的答案:</p>
+<blockquote>
+<p>这种东西，当然要借助工具了，才能够写得即规范，又格式化，还能够支持后续分析。 目前比较建议的是，使用终端工具 <a href="https://link.juejin.im?target=https%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%253A%2F%2Fgithub.com%2Fcommitizen%2Fcz-cli" target="_blank" rel="noopener">commitizen/cz-cli</a> + <a href="https://link.juejin.im?target=https%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%253A%2F%2Fgithub.com%2Fcommitizen%2Fcz-conventional-changelog" target="_blank" rel="noopener">commitizen/cz-conventional-changelog</a>  + <a href="https://link.juejin.im?target=https%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%253A%2F%2Fgithub.com%2Fconventional-changelog%2Fstandard-version" target="_blank" rel="noopener">conventional-changelog/standard-version</a> 一步解决提交信息和版本发布。<br> 甚至，如果想更狠一点，在持续集成里面加入 <a href="https://link.juejin.im?target=https%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%253A%2F%2Fgithub.com%2Fmarionebl%2Fcommitlint" target="_blank" rel="noopener">marionebl/commitlint</a> 检查 commit 信息是否符合规范，也不是不可以。</p>
+</blockquote>
+<p>本文就顺着这个方向, 给大家介绍下如何保障项目 commit message 的规范和格式化.</p>
+<h2 id="Commit-Message-格式"><a href="#Commit-Message-格式" class="headerlink" title="Commit Message 格式"></a>Commit Message 格式</h2><p>目前规范使用较多的是 <a href="https://link.juejin.im?target=https%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%253A%2F%2Fgithub.com%2Fangular%2Fangular.js%2Fblob%2Fmaster%2FDEVELOPERS.md%2523-git-commit-guidelines" target="_blank" rel="noopener">Angular 团队的规范</a>, 继而衍生了 <a href="https://link.juejin.im?target=https%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%253A%2F%2Fconventionalcommits.org%2F" target="_blank" rel="noopener">Conventional Commits specification</a>. 很多工具也是基于此规范, 它的 message 格式如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;</span><br><span class="line">&lt;BLANK LINE&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;BLANK LINE&gt;</span><br><span class="line">&lt;footer&gt;</span><br></pre></td></tr></table></figure>
+<p>我们通过 git commit 命令带出的 vim 界面填写的最终结果应该类似如上这个结构, 大致分为三个部分(使用空行分割):</p>
+<ul>
+<li>标题行: 必填, 描述主要修改类型和内容</li>
+<li>主题内容: 描述为什么修改, 做了什么样的修改, 以及开发的思路等等</li>
+<li>页脚注释: 放 Breaking Changes 或 Closed Issues</li>
+</ul>
+<p>分别由如下部分构成:</p>
+<ul>
+<li>type: commit 的类型</li>
+<li>feat: 新特性</li>
+<li>fix: 修改问题</li>
+<li>refactor: 代码重构</li>
+<li>docs: 文档修改</li>
+<li>style: 代码格式修改, 注意不是 css 修改</li>
+<li>test: 测试用例修改</li>
+<li>chore: 其他修改, 比如构建流程, 依赖管理.</li>
+<li>scope: commit 影响的范围, 比如: route, component, utils, build…</li>
+<li>subject: commit 的概述, 建议符合  <a href="https://link.juejin.im?target=https%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%253A%2F%2Fstackoverflow.com%2Fquestions%2F2290016%2Fgit-commit-messages-50-72-formatting" target="_blank" rel="noopener">50/72 formatting</a></li>
+<li>body: commit 具体修改内容, 可以分为多行, 建议符合 <a href="https://link.juejin.im?target=https%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%253A%2F%2Fstackoverflow.com%2Fquestions%2F2290016%2Fgit-commit-messages-50-72-formatting" target="_blank" rel="noopener">50/72 formatting</a></li>
+<li>footer: 一些备注, 通常是 BREAKING CHANGE 或修复的 bug 的链接.</li>
+</ul>
+<p>这样一个符合规范的 commit message, 就好像是一份邮件.</p>
+<h2 id="git-commit-模板"><a href="#git-commit-模板" class="headerlink" title="git commit 模板"></a>git commit 模板</h2><p>如果你只是个人的项目, 或者想尝试一下这样的规范格式, 那么你可以为 git 设置 commit template, 每次 git commit 的时候在 vim 中带出, 时刻提醒自己:</p>
+<p>修改 ~/.gitconfig, 添加:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[commit]</span><br><span class="line">template = ~/.gitmessage</span><br></pre></td></tr></table></figure>
+<p>新建 ~/.gitmessage 内容可以如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># head: &lt;type&gt;(&lt;scope&gt;): &lt;subject&gt;</span><br><span class="line"># - type: feat, fix, docs, style, refactor, test, chore</span><br><span class="line"># - scope: can be empty (eg. if the change is a global or difficult to assign to a single component)</span><br><span class="line"># - subject: start with verb (such as &apos;change&apos;), 50-character line</span><br><span class="line">#</span><br><span class="line"># body: 72-character wrapped. This should answer:</span><br><span class="line"># * Why was this change necessary?</span><br><span class="line"># * How does it address the problem?</span><br><span class="line"># * Are there any side effects?</span><br><span class="line">#</span><br><span class="line"># footer: </span><br><span class="line"># - Include a link to the ticket, if any.</span><br><span class="line"># - BREAKING CHANGE</span><br><span class="line">#</span><br></pre></td></tr></table></figure>
+<h2 id="Commitizen-替代你的-git-commit"><a href="#Commitizen-替代你的-git-commit" class="headerlink" title="Commitizen: 替代你的  git commit"></a>Commitizen: 替代你的  git commit</h2><p>我们的目标还是要通过工具生成和约束, 那么现在就开始吧.</p>
+<p><a href="https://link.juejin.im?target=https%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%253A%2F%2Fgithub.com%2Fcommitizen%2Fcz-cli" target="_blank" rel="noopener">commitizen/cz-cli</a>, 我们需要借助它提供的 git cz 命令替代我们的 git commit 命令, 帮助我们生成符合规范的 commit message.</p>
+<p>除此之外, 我们还需要为 commitizen 指定一个 Adapter 比如: <a href="https://link.juejin.im?target=https%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%253A%2F%2Fgithub.com%2Fcommitizen%2Fcz-conventional-changelog" target="_blank" rel="noopener">cz-conventional-changelog</a> (一个符合 Angular团队规范的 preset). 使得 commitizen 按照我们指定的规范帮助我们生成 commit message.</p>
+<h2 id="全局安装"><a href="#全局安装" class="headerlink" title="全局安装"></a>全局安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install -g commitizen cz-conventional-changelog</span><br><span class="line">echo &apos;&#123; &quot;path&quot;: &quot;cz-conventional-changelog&quot; &#125;&apos; &gt; ~/.czrc</span><br></pre></td></tr></table></figure>
+<p>主要, 全局模式下, 需要 ~/.czrc 配置文件, 为 commitizen 指定 Adapter.</p>
+<h2 id="项目级安装"><a href="#项目级安装" class="headerlink" title="项目级安装"></a>项目级安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -D commitizen cz-conventional-changelog</span><br></pre></td></tr></table></figure>
+<p>package.json中配置:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&quot;script&quot;: &#123;</span><br><span class="line">    ...,</span><br><span class="line">    &quot;commit&quot;: &quot;git-cz&quot;,</span><br><span class="line">&#125;,</span><br><span class="line"> &quot;config&quot;: &#123;</span><br><span class="line">    &quot;commitizen&quot;: &#123;</span><br><span class="line">      &quot;path&quot;: &quot;node_modules/cz-conventional-changelog&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>如果全局安装过 commitizen, 那么在对应的项目中执行 git cz or npm run commit 都可以.</p>
+<h2 id="自定义-Adapter"><a href="#自定义-Adapter" class="headerlink" title="自定义 Adapter"></a>自定义 Adapter</h2><p>也许 Angular 的那套规范我们不习惯, 那么可以通过指定 Adapter <a href="https://link.juejin.im?target=https%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%253A%2F%2Fgithub.com%2Fleonardoanalista%2Fcz-customizable" target="_blank" rel="noopener">cz-customizable</a> 指定一套符合自己团队的规范.</p>
+<p>全局 或 项目级别安装:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm i -g cz-customizable</span><br><span class="line">or</span><br><span class="line">npm i -D cz-customizable</span><br></pre></td></tr></table></figure>
+<p>修改 .czrc 或 package.json 中的 config 为:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;path&quot;: &quot;cz-customizable&quot; &#125;</span><br><span class="line">or</span><br><span class="line">  &quot;config&quot;: &#123;</span><br><span class="line">    &quot;commitizen&quot;: &#123;</span><br><span class="line">      &quot;path&quot;: &quot;node_modules/cz-customizable&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>同时在~/ 或项目目录下创建 .cz-config.js 文件, 维护你想要的格式: 比如我的配置文件: <a href="https://link.juejin.im?target=https%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%253A%2F%2Fgist.github.com%2Fleohxj%2F7bc928f60bfa46a3856ddf7c0f91ab98" target="_blank" rel="noopener">leohxj/.cz-config</a></p>
+<p>效果如下:</p>
+<h2 id="Commitlint-校验你的-message"><a href="#Commitlint-校验你的-message" class="headerlink" title="Commitlint: 校验你的 message"></a>Commitlint: 校验你的 message</h2><p><a href="https://link.juejin.im?target=https%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%253A%2F%2Fgithub.com%2Fmarionebl%2Fcommitlint" target="_blank" rel="noopener">commitlint</a>: 可以帮助我们 lint commit messages, 如果我们提交的不符合指向的规范, 直接拒绝提交, 比较狠.</p>
+<p>同样的, 它也需要一份校验的配置, 这里推荐 <a href="https://link.juejin.im?target=https%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%253A%2F%2Fgithub.com%2Fmarionebl%2Fcommitlint%2Ftree%2Fmaster%2F%2540commitlint%2Fconfig-conventional" target="_blank" rel="noopener">@commitlint/config-conventional</a> (符合 Angular团队规范).</p>
+<p>安装:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -D @commitlint/config-conventional @commitlint/cli</span><br></pre></td></tr></table></figure>
+<p>同时需要在项目目录下创建配置文件 .commitlintrc.js, 写入:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  extends: [</span><br><span class="line">    &apos;&apos;@commitlint/config-conventional&apos;&apos;</span><br><span class="line">  ],</span><br><span class="line">  rules: &#123;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="针对自定义的-Adapter-进行-Lint"><a href="#针对自定义的-Adapter-进行-Lint" class="headerlink" title="针对自定义的 Adapter 进行 Lint"></a>针对自定义的 Adapter 进行 Lint</h2><p>如果你像我一样, 使用的是自定义的 commitizen adapter, 那么你需要:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -D commitlint-config-cz @commitlint/cli</span><br></pre></td></tr></table></figure>
+<p>.commitlintrc.js 中写入:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">module.exports = &#123;</span><br><span class="line">  extends: [</span><br><span class="line">    &apos;cz&apos;</span><br><span class="line">  ],</span><br><span class="line">  rules: &#123;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="结合-Husky"><a href="#结合-Husky" class="headerlink" title="结合 Husky"></a>结合 Husky</h2><p>校验 commit message 的最佳方式是结合 git hook, 所以需要配合 <a href="https://link.juejin.im?target=https%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%253A%2F%2Fgithub.com%2Ftypicode%2Fhusky" target="_blank" rel="noopener">Husky</a>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i husky@next</span><br></pre></td></tr></table></figure>
+<p>package.json 中添加:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&quot;husky&quot;: &#123;</span><br><span class="line">    &quot;hooks&quot;: &#123;</span><br><span class="line">      ...,</span><br><span class="line">      &quot;commit-msg&quot;: &quot;commitlint -e $GIT_PARAMS&quot;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+<p>效果如下:</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/5/16/16369a14ec9ef140?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="img"></p>
+<h2 id="standard-version-自动生成-CHANGELOG"><a href="#standard-version-自动生成-CHANGELOG" class="headerlink" title="standard-version: 自动生成 CHANGELOG"></a>standard-version: 自动生成 CHANGELOG</h2><p>通过以上工具的帮助, 我们的工程 commit message 应该是符合 Angular团队那套, 这样也便于我们借助 <a href="https://link.juejin.im?target=https%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttps%253A%2F%2Fgithub.com%2Fconventional-changelog%2Fstandard-version" target="_blank" rel="noopener">standard-version</a> 这样的工具, 自动生成 CHANGELOG, 甚至是 语义化的版本号(<a href="https://link.juejin.im?target=https%3A%2F%2Flink.zhihu.com%2F%3Ftarget%3Dhttp%253A%2F%2Fsemver.org%2Flang%2Fzh-CN%2F" target="_blank" rel="noopener">Semantic Version</a>).</p>
+<p>安装使用:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -S standard-version</span><br></pre></td></tr></table></figure>
+<p>package.json 配置:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;scirpt&quot;: &#123;</span><br><span class="line">    ...,</span><br><span class="line">    &quot;release&quot;: &quot;standard-version&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>PS: standard-version 有很多其他的特性, 这里不过多涉及, 有兴趣的同学自行尝试.</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#程序素养" >
+    <span class="tag-code">程序素养</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2018/06/02/2018-06-24-1/">
+        <span class="nav-arrow">← </span>
+        
+          有关Promise的几个问题
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- Gitment START -->
+      <div id="comments"></div>
+      <!-- Gitment END -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#如何优雅的提交Git-Commit-Message"><span class="toc-nav-text">如何优雅的提交Git Commit Message</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#起因"><span class="toc-nav-text">起因</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Commit-Message-格式"><span class="toc-nav-text">Commit Message 格式</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#git-commit-模板"><span class="toc-nav-text">git commit 模板</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Commitizen-替代你的-git-commit"><span class="toc-nav-text">Commitizen: 替代你的  git commit</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#全局安装"><span class="toc-nav-text">全局安装</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#项目级安装"><span class="toc-nav-text">项目级安装</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#自定义-Adapter"><span class="toc-nav-text">自定义 Adapter</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Commitlint-校验你的-message"><span class="toc-nav-text">Commitlint: 校验你的 message</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#针对自定义的-Adapter-进行-Lint"><span class="toc-nav-text">针对自定义的 Adapter 进行 Lint</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#结合-Husky"><span class="toc-nav-text">结合 Husky</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#standard-version-自动生成-CHANGELOG"><span class="toc-nav-text">standard-version: 自动生成 CHANGELOG</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://dekura.github.io/2018/06/26/2018-06-26/';
+    var banner = 'http://osmisz4zw.bkt.clouddn.com/15300216785968.jpg'
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+        
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+
+    // gitment
+    var gitmentConfig = "dekura";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "如何优雅的提交Git Commit Message",
+        owner: "dekura",
+        repo: "dekura.github.io",
+        oauth: {
+          client_id: "97e1d6e9653a91635905",
+          client_secret: "97ec9074518f7f02d092d022183c6ba6effbb2c1"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2018 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
