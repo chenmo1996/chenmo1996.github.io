@@ -141,6 +141,39 @@
   
     <article class="article-card">
       <h2 class="article-head">
+        <a href="/2018/03/24/2018-03-24/">深入理解React 高阶组件</a>
+      </h2>
+      <p class="article-date">2018年3月24日</p>
+      
+        
+  <a href="/tags#面试准备" >
+    <span class="tag-code">面试准备</span>
+  </a>
+
+  <a href="/tags#技术分享" >
+    <span class="tag-code">技术分享</span>
+  </a>
+
+  <a href="/tags#语言基础" >
+    <span class="tag-code">语言基础</span>
+  </a>
+
+  <a href="/tags#框架原理" >
+    <span class="tag-code">框架原理</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <p>React高阶组件就是一个函数，这个函数接受一个组件作为参数，从而返回一个新的组件，作为参数的组件是新的组件的子组件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;HOC&gt;&lt;inher&gt;&lt;/inner&gt;&lt;/HOC&gt;</span><br><span class="line"></span><br><span class="line">import React, &#123; Component &#125; from &apos;react&apos;</span><br><span class="line"></span><br><span class="line">export default (WrappedComponent) =&gt; &#123;</span><br><span class="line">  class NewComponent extends Component &#123;</span><br><span class="line">    // 可以做很多自定义逻辑</span><br><span class="line">    render () &#123;</span><br><span class="line">      return &lt;WrappedComponent /&gt;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  return NewComponent</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+      </div>
+      <a class="more" href="/2018/03/24/2018-03-24/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
         <a href="/2018/03/23/2018-03-23/">深入ES6 Proxy</a>
       </h2>
       <p class="article-date">2018年3月23日</p>
@@ -429,35 +462,6 @@
         
       </div>
       <a class="more" href="/2018/03/14/2018-03-14/">Read more</a>
-    </article>
-  
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2018/03/06/2018-03-11/">简单介绍ES6 Generator</a>
-      </h2>
-      <p class="article-date">2018年3月6日</p>
-      
-        
-  <a href="/tags#面试准备" >
-    <span class="tag-code">面试准备</span>
-  </a>
-
-  <a href="/tags#技术分享" >
-    <span class="tag-code">技术分享</span>
-  </a>
-
-  <a href="/tags#语言基础" >
-    <span class="tag-code">语言基础</span>
-  </a>
-
-      
-      <div class="article-summary">
-        
-          <p>简单介绍ES6 Generator</p>
-<p><img src="http://osmisz4zw.bkt.clouddn.com/20180311152073658640449.jpg" alt="20180311152073658640449.jpg"><br>
-        
-      </div>
-      <a class="more" href="/2018/03/06/2018-03-11/">Read more</a>
     </article>
   
 

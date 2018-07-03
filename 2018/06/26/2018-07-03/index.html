@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Dekura&#39;s Blog">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      协作文档的算法实现 | Dekura
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Dekura</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>协作文档的算法实现</h2>
+  <p class="post-date">2018-06-26</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>operation transform了解一下？<br><img src="http://osmisz4zw.bkt.clouddn.com/15306235900038.jpg" alt=""></p>
+<a id="more"></a>
+<h1 id="协同文档的技术实现"><a href="#协同文档的技术实现" class="headerlink" title="协同文档的技术实现"></a>协同文档的技术实现</h1><p>dekuchen 2018.6</p>
+<p>1984 年，MIT 的科学家提出了计算机支持的协同工作（Computer Supported Cooperative Work，缩写为 CSCW），使得人们可以借助计算机和互联网去完成协同工作。比如利用用于文档编辑的 Wikis 和用于编程的版本控制系统，小组成员可以在世界任意角落去共同编写大型的百科全书或软件系统</p>
+<p>协同文档现在貌似有很多公司陆续实现了，例如最早的 Google、国内的石墨文档、腾讯的腾讯文档等等。</p>
+<p>虽然在使用中看似很简单，但是实际上这个协同文档的技术实现有很多需要注意的地方。对于公司来说，由于员工较多，而且一般 leader 具有较高工程能力，对他们来说不是什么很困难的事情。但是即使这样，Google 办公套件至少用了两年时间才使他们的协同系统成熟。</p>
+<p>这里我简单的跟大家分享一下，协同文档的技术实现的其中一个方式，也是最具有普遍意义的方式，可以协同任何数据结构。 </p>
+<p>这个算法被称为 <a href="https://en.m.wikipedia.org/wiki/Operational_transformation" target="_blank" rel="noopener">OT 算法</a>。这个算法本身并不复杂，但是协同文档本身涉及更复杂的系统设计，因为它本身就是分布式的，至少客户端和服务端是分布式的。在较高性能的要求下，服务端可能也是分布式的。所以，如何使这些都能很好的协同，是很值得考虑的。</p>
+<p>这次分享实际上是抛砖引玉。我个人认为既然是分享就一定要分享一些不容易从互联网上找到的，并且包含有思考的东西，所以选择了这个算法来分享。</p>
+<h2 id="OT算法"><a href="#OT算法" class="headerlink" title="OT算法"></a>OT算法</h2><h3 id="实时协同编辑的概念和原理"><a href="#实时协同编辑的概念和原理" class="headerlink" title="实时协同编辑的概念和原理"></a>实时协同编辑的概念和原理</h3><p>实时协同编辑，通俗来讲，是指多人同时在线编辑一个文档，且当一个参与者编辑文档的某处时，这个修改会立即同步到其他参与者的计算机上。归纳起来，需要下面几个步骤：</p>
+<ol>
+<li>计算出当前参与者对文档做出的修改，并发送到服务器</li>
+<li>在服务器端，对所有参与者的修改进行合并以及冲突处理</li>
+<li>讲合并之后的结果返回到所有参与者的计算机上</li>
+<li>将光标移动到正确的位置</li>
+</ol>
+<p>由于没有锁的机制，当多个参与者在编辑同一处内容时，便可能出现冲突，这个时候就需要通过一定的算法来自动地解决这些冲突。最后，当所有改变都同步后，每个参与者计算机上所看到的文档内容应该是完全一致的。</p>
+<blockquote>
+<p>It turns out that implementing this kind of real-time collaboration is far from trivial. The most common solution responds to the name <em>Operational Transformation</em> (usually abbreviated <em>OT</em>). It originated from a <a href="http://dl.acm.org/citation.cfm?doid=67544.66963" target="_blank" rel="noopener">research paper</a> published in 1989 but got more recently popularized by <a href="http://en.wikipedia.org/wiki/Google_Wave" target="_blank" rel="noopener">Google Wave</a>. Today, it powers many collaborative editors such as</p>
+<ul>
+<li><a href="http://www.codingmonkeys.de/subethaedit/" target="_blank" rel="noopener">SubEthaEdit (code editor)</a></li>
+<li><a href="http://etherpad.org/" target="_blank" rel="noopener">EtherPad</a></li>
+<li><a href="https://docs.google.com/" target="_blank" rel="noopener">Google Docs</a></li>
+<li><a href="https://gomockingbird.com/" target="_blank" rel="noopener">Mockingbird (tool for creating wireframes)</a></li>
+</ul>
+<p>These are only a few examples from a growing number of <a href="http://en.wikipedia.org/wiki/Collaborative_real-time_editor" target="_blank" rel="noopener">applications with realtime collaboration</a>. I expect this number to rise even faster now that Google has published the Drive Realtime API, which is based on OT and let’s third-party apps use the same collaboration as Google Docs.</p>
+</blockquote>
+<p><a href="http://operational-transformation.github.io/what-is-ot.html" target="_blank" rel="noopener">http://operational-transformation.github.io/what-is-ot.html</a></p>
+<blockquote>
+<h2 id="How-does-Operational-Transformation-work"><a href="#How-does-Operational-Transformation-work" class="headerlink" title="How does Operational Transformation work?"></a>How does Operational Transformation work?</h2><p>Here’s the short overview:</p>
+<ul>
+<li>Every change to a shared document is represented as an <u><strong>operation</strong></u>. In a text editor, this operation could be the insertion of the character ‘A’ at position 12. An operation can be applied to the current document resulting in a new document state.</li>
+<li>To handle concurrent operations, there is a <strong><u>function</u></strong> (usually called <strong><u>transform</u></strong>) that takes two operations that have been applied to the same document state (but on different clients) and computes a new operation that can be applied after the second operation and that preserves the first operation’s intended change. Let’s make this clear with an example: User A inserts the character ‘A’ at position 12 while user B inserts ‘B’ at the beginning at the document. The concurrent operations are therefore <code>insert(12, &#39;A&#39;)</code>and <code>insert(0, &#39;B&#39;)</code>. If we would simply send B’s operation to client A and applied it there, there is no problem. But if we send A’s operation to B and apply it after B’s operation has been applied, the character ‘A’ would be inserted one character one position left from the correct position. Moreover, after these operations, A’s document state and B’s document state wouldn’t be the same. Therefore, A’s operation <code>insert(12, &#39;A&#39;)</code> has to be transformed against B’s operation to take into account that B inserted a character before position 12 producing the operation <code>insert(13, &#39;A&#39;)</code>. This new operation can be applied on client B after B’s operation.</li>
+<li>This function can be used to build a client-server protocol that handles collaboration between any number of clients. This is explained in Daniel Spiewak’s excellent article <a href="http://www.codecommit.com/blog/java/understanding-and-applying-operational-transformation" target="_blank" rel="noopener">Understanding and Applying Operational Transformation</a>.</li>
+</ul>
+<p>However, you don’t have to understand the details of Operational Transformation to use it with this library in your own project.</p>
+</blockquote>
+<h3 id="Changeset"><a href="#Changeset" class="headerlink" title="Changeset"></a>Changeset</h3><p>一个文档可以被抽象为一系列操作的集合，这个集合便是 <strong>changeset</strong>。</p>
+<p>changeset 具有如下的特征：</p>
+<ol>
+<li>changeset 是对文档一系列操作的集合</li>
+<li>这些操作必须是指定的一些操作其中的一种或多种</li>
+<li>changeset 只有它基于某个特定的版本的文档时才是有意义的</li>
+<li>一个文档可以表示为一系列的 <em>changeset</em> 依次应用于 <em>空文档</em> 之后得到的</li>
+<li>定义运算 $AB$，意为将 changeset $B$ 应用到 $A$ 上</li>
+<li>定义 $C = AB$，意为 changeset $C$  产生的效果等等价于依次应用 $A$, $B$ 产生的效果</li>
+<li>changeset 一般表示为 $C_v$， 意为一个基于版本号 $v$ 的 changeset</li>
+</ol>
+<p>对于 changeset，通常可以使用 json 的形式表示。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Action &#123;</span><br><span class="line">  <span class="keyword">type</span>: <span class="built_in">string</span>;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> Changeset &#123;</span><br><span class="line">  version: <span class="built_in">number</span>;</span><br><span class="line">  actions: Action[];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>例如，下面的 changeset 是在协同表格的第 15 行后面添加一行，并删掉第 5 行。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"version"</span>: <span class="number">0</span>,</span><br><span class="line">  <span class="attr">"actions"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"insertRowAfter"</span>,</span><br><span class="line">      <span class="attr">"index"</span>: <span class="number">15</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"deleteRow"</span>,</span><br><span class="line">      <span class="attr">"index"</span>: <span class="number">5</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong></p>
+<ol>
+<li>changeset 中 action 的顺序必须保留，因为 index 的位置可能会被改变。</li>
+<li>一般每 $500ms$ 收集一次 action （变更动作），并生成一个 changeset</li>
+</ol>
+<h3 id="Follow"><a href="#Follow" class="headerlink" title="Follow"></a>Follow</h3><p>上面说到过，changeset 只有基于某个版本才是有意义的。</p>
+<p>假设， 有一个 A 客户端和一个 B 客户端，他们在某时刻具有一样的文档 $X$, 这时，A 做了 $A$ 操作，B 做了 $B$ 操作，他们本地的文档看上去已经不再一样，这时，我们便需要进行 <strong>协同</strong></p>
+<p>我们可能会采用 merge 的思路。意思是，将 A 的操作和 B 的操作在服务端进行 merge，然后分别应用到 X 上，即</p>
+<p>$X ← Xmerge(A, B)$</p>
+<p>但是，这显然不可取，因为无论在 A 还是 B 端，都已经分别是 $XA$, $XB$ 了</p>
+<p>我们采用 <em>follow</em> 算法</p>
+<p>follow 具有如下特征</p>
+<ol>
+<li>一致性，$XAfollow(A,B)=XBfollow(B,A)$</li>
+<li>合法性，由 follow 得到的 $follow(A,B)$ 或 $follow(B,A)$ 必须符合业务逻辑</li>
+<li>follow 必须是数学上的纯函数，也即，对于确定的自变量 $A$，$B$，$follow(A,B)$ 的函数值一定</li>
+</ol>
+<p>follow 的以上特性使其很适合作为协同编辑的运算单元。</p>
+<h3 id="链式反应法则"><a href="#链式反应法则" class="headerlink" title="链式反应法则"></a>链式反应法则</h3><p>定义 $V_n=C_1C_2…C_n$ 为第 $n$ 版本的服务端的文档。</p>
+<p>假设服务端的数据库存储了形如 $V_0→V_1→V_2→V_3→…→V_m→ …→V_H$ 版本信息的某文档，则若有某 changeset $C_m’(m&lt;n)$ 的变更需要应用到该文档，显然，$C_m’$ 不能直接应用到 $V_H$（版本不兼容）。这时，我们根据 follow 的特性，容易想到使用 follow 来做变换。</p>
+<p>由于</p>
+<p>$$<br>V_{m+1}=V_mC_{m+1}<br>$$</p>
+<p>即</p>
+<p>$$<br>V_{m+1} follow(C_{m+1},C_m’) = V_m C_{m+1} follow(C_{m+1},C_m’) = V_m C_m’ follow(C_m’,C_{m+1})<br>$$</p>
+<p>由此我们可以得到一个</p>
+<p>$$<br>C_{m+1}’ = follow(C_{m+1},C_m’)<br>$$</p>
+<p>同理</p>
+<p>$$<br>C_{m+2}’ = follow(C_{m+2},follow(C_{m+1},C_m’))<br>$$</p>
+<p>重复以上过程，可以得到一个相对于 $C_H$ 的 $C_H’$。在实现的时候，可以使用数组的 <code>reduce</code> 来进行。</p>
+<p>得到该 $V_H’$ 之后，这个 changeset 可以应用到最新的文档 $V_H$ 上，这样便可以完成此次编辑。</p>
+<h3 id="客户端的行为定义"><a href="#客户端的行为定义" class="headerlink" title="客户端的行为定义"></a>客户端的行为定义</h3><p>客户端负责收集新的变更，生成 changeset 并发送给服务端， 客户端因此需要  维护一些状态、存在一定的生命周期。</p>
+<p>$A$: 本地最新的版本，类比服务端的 $V_H$</p>
+<p>$X$: 发送给服务端的 changeset，但是还没有得到服务端的确认</p>
+<p>$Y$: 用户做的变更生成的 changeset，但是还没有发送给服务端</p>
+<p>容易知道，本地文档看上去的样子显然应该是 $V=AXY$</p>
+<p>当收到服务端推送过来的 changeset $B$ 时，客户端应该</p>
+<ol>
+<li>确认是否是可以应用到 A  上的版本的 changeset</li>
+<li><p>处理 changeset</p>
+<ol>
+<li>如果可以应用到 A 上<ol>
+<li>进行运算：<ol>
+<li>$A’ ← AB$</li>
+<li>$X’ ← follow(B, X)$</li>
+<li>$Y’ ← follow(follow(X, B),Y)$</li>
+<li>$D ← follow(X,follow(X, B))$</li>
+</ol>
+</li>
+<li>赋值 $A ← A’$, $X ← X’$, $Y ← Y’$</li>
+<li>应用 $D$ 到文档上</li>
+</ol>
+</li>
+<li>如果不能，对 $B$ 根据链式反应法则进行处理， 得到的 $B’$ 应用上面的计算过</li>
+</ol>
+</li>
+</ol>
+<p>证明:</p>
+<p>$$<br>A’X’Y’= ABfollow(B,X)follow(follow(X,B),Y)<br>$$</p>
+<p>$$<br>A’X’Y’= AXfollow(X,B)follow(follow(X,B),Y)<br>$$</p>
+<p>$$<br>A’X’Y’= AXYfollow(Y,follow(X,B))<br>$$</p>
+<p>$$<br>A’X’Y’= AXYD<br>$$</p>
+<p>$$<br>A’X’Y’=VD<br>$$</p>
+<p>当发送出去一个 changeset 的后，等待服务端的 ACK。当收到 ACK 的时候</p>
+<ol>
+<li>$A ← AX$</li>
+<li>$X ← null$</li>
+</ol>
+<h3 id="服务端的行为定义"><a href="#服务端的行为定义" class="headerlink" title="服务端的行为定义"></a>服务端的行为定义</h3><p>这里暂时只举例只有一台服务器的情况</p>
+<p>服务端在数据库中维护一个形如 ${V_n} = V_0→V_1→V_2→V_3→…→V_m→ …→V_H$ 版本信息列表</p>
+<p>当有活跃用户进入这个文档时，读入内存中</p>
+<p>当一个 changeset $C$ 从客户端发送过来的时候</p>
+<ol>
+<li>服务端确认是否可以应用到 $V_H$ 上</li>
+<li>处理这个 changeset<ol>
+<li>如果可以应用到 $V_H$ 上<ol>
+<li>直接将这个 changeset 推入记录，并以某种频率保持和数据库同步。</li>
+<li>将该 changeset 推送到其余所有进入该文档的客户端</li>
+<li>回应该客户端 ACK 并附带服务端最新的版本号（或 ACK 的 changeset 的版本号）</li>
+</ol>
+</li>
+<li>如果不能应用到 $V_H$ 上<ol>
+<li>根据链式反应法则对 $C$ 进行处理</li>
+<li>将得到的 $C’$ 按照上面的流程处理</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="接口和模块定义"><a href="#接口和模块定义" class="headerlink" title="接口和模块定义"></a>接口和模块定义</h3><h4 id="公共"><a href="#公共" class="headerlink" title="公共"></a>公共</h4><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> Change &#123;</span><br><span class="line">  <span class="keyword">type</span>: <span class="built_in">string</span>;</span><br><span class="line">  [k: <span class="built_in">string</span>]: <span class="built_in">any</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Changeset = &#123;</span><br><span class="line">  baseVersion: <span class="built_in">number</span>;</span><br><span class="line">  changes: Change[];</span><br><span class="line">&#125; | <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> FollowFunc = <span class="function">(<span class="params">cs1: Changeset, cs2: Changeset</span>) =&gt;</span> Changeset;</span><br></pre></td></tr></table></figure>
+<h3 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h3><p>定义 client：</p>
+<ol>
+<li>client 是一个客户端</li>
+<li>client 的初始化需要指定一个 websocket 实例，该实例需要是正在连接或者 OPEN 的状态</li>
+<li>client 的实现不需要覆盖用户身份、权限等和协同无关的逻辑</li>
+<li>client 的实例应该暴露创建一个协同文档的接口</li>
+<li>可以在一个 client 上创建多个协同文档</li>
+</ol>
+<p>定义 client 协同文档：</p>
+<ol>
+<li>协同文档是一个父类</li>
+<li>协同文档的方法<ol>
+<li>进入文档</li>
+<li>编辑（传入变更）</li>
+<li>离开文档</li>
+</ol>
+</li>
+<li>协同文档需要定义的生命周期钩子：<ol>
+<li>已经进入文档</li>
+<li>已经离开文档</li>
+<li>连接重新建立</li>
+<li>被拒绝进入文档</li>
+<li>新的变更需要应用到文档（传出变更）</li>
+<li>需要清空文档</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// &lt;reference path="common.d.ts" /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> = CoSyncClient;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> DocumentLifecycle &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">declare</span> <span class="keyword">class</span> Document &#123;</span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params">followFunc: FollowFunc, documentId: <span class="built_in">string</span></span>);</span><br><span class="line"></span><br><span class="line">  connected?(<span class="params"></span>): void;</span><br><span class="line">  reconnected?(<span class="params">ws: WebSocket</span>): void;</span><br><span class="line">  connectionLost?(<span class="params">reason: <span class="built_in">string</span></span>): void;</span><br><span class="line">  connectionClosed?(<span class="params">reason: <span class="built_in">string</span></span>): void;</span><br><span class="line">  connectionRejected?(<span class="params">reason: <span class="built_in">string</span></span>): void;</span><br><span class="line">  applyChanges?(<span class="params">changes: Change[]</span>): void;</span><br><span class="line">  makeEmpty?(<span class="params"></span>): void;</span><br><span class="line"></span><br><span class="line">  edit(<span class="params">change: Change</span>): void;</span><br><span class="line">  leaveDocument(<span class="params"></span>): Promise&lt;void&gt;;</span><br><span class="line">  enterDocument(<span class="params"></span>): Promise&lt;void&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">declare namespace CoSyncClient &#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">createClient</span>(<span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">    websocket: WebSocket</span></span></span><br><span class="line"><span class="function"><span class="params">  </span>): </span>&#123;</span><br><span class="line">    Document: <span class="keyword">new</span> (followFunc: FollowFunc, documentId: <span class="built_in">string</span>) =&gt; Document;</span><br><span class="line">    getAllDocuments: <span class="function"><span class="params">()</span> =&gt;</span> Document[];</span><br><span class="line">    websocket: WebSocket;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h3><p>定义 server:</p>
+<ol>
+<li>server 实际上是与客户端对立的部分服务端</li>
+<li>server 的初始化需要指定一个 websocket 实例，该实例需要是正在连接或者 OPEN 的状态</li>
+<li>server 的实现不需要覆盖用户身份、权限等和协同无关的逻辑</li>
+<li>当 client 和 server 的稳定、互信的连接建立，客户端每创建并进入一个文档，服务端创建相应的 server 协同文档实例</li>
+<li>server 的实例应该暴露一个类似 <code>onEnterRequest</code> 的回调注册函数，该回调函数</li>
+</ol>
+<p>定义 server 协同文档：</p>
+<ol>
+<li>协同文档是一个父类</li>
+<li>协同文档的方法<ol>
+<li>允许进入文档</li>
+<li>拒绝进入文档</li>
+<li>关闭文档</li>
+</ol>
+</li>
+<li>协同文档需要定义的生命周期钩子：<ol>
+<li>获取全部 changeset（从数据库）</li>
+<li>changeset 将要被处理</li>
+<li>changeset 将要被接受</li>
+<li>changeset 将要被广播</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// &lt;reference path="common.d.ts" /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> WebSocket <span class="keyword">from</span> <span class="string">"ws"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">declare</span> <span class="keyword">class</span> Document &#123;</span><br><span class="line">  <span class="keyword">constructor</span>(<span class="params">followFunc: FollowFunc, docuemntId: <span class="built_in">string</span></span>);</span><br><span class="line"></span><br><span class="line">  getInitialDocument(<span class="params"></span>): Promise&lt;Set&lt;Changeset&gt;&gt;;</span><br><span class="line">  saveChangeset(<span class="params">cs: Changeset</span>): Promise&lt;void&gt;;</span><br><span class="line">  changesetWillBeHandled(<span class="params">cs: Changeset</span>): void;</span><br><span class="line">  changesetWillBeAccepted(<span class="params">cs: Changeset</span>): boolean | void;</span><br><span class="line">  changesetWillBeBroadcast(<span class="params">cs: Changeset</span>): boolean | void;</span><br><span class="line"></span><br><span class="line">  private broadcast(<span class="params">cs: Changeset</span>): void;</span><br><span class="line">  private sendInitialDocument(<span class="params"><span class="built_in">document</span>: Set&lt;Changeset&gt;</span>): void;</span><br><span class="line"></span><br><span class="line">  acceptEnter(<span class="params"></span>): void;</span><br><span class="line">  rejectEnter(<span class="params">reason: <span class="built_in">string</span></span>): void;</span><br><span class="line">  closeDocument(<span class="params">reason: <span class="built_in">string</span></span>): void;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export = CoSyncServer;</span><br><span class="line">declare namespace CoSyncServer &#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">createServer</span>(<span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">    websocket: WebSocket</span></span></span><br><span class="line"><span class="function"><span class="params">  </span>): </span>&#123;</span><br><span class="line">    getAllDocuments: <span class="function"><span class="params">()</span> =&gt;</span> Document[];</span><br><span class="line">    websocket: WebSocket;</span><br><span class="line">    onEnterRequest: (</span><br><span class="line">      cb: (</span><br><span class="line">        websocket: WebSocket,</span><br><span class="line">        documentId: <span class="built_in">string</span>,</span><br><span class="line">        Document: <span class="keyword">new</span> (followFunc: FollowFunc) =&gt; Document</span><br><span class="line">      ) =&gt; <span class="built_in">void</span>,</span><br><span class="line">      once: <span class="built_in">boolean</span></span><br><span class="line">    ) =&gt; <span class="built_in">void</span>;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="客户端和服务端消息结构"><a href="#客户端和服务端消息结构" class="headerlink" title="客户端和服务端消息结构"></a>客户端和服务端消息结构</h3><ol>
+<li><p>client -&gt; server</p>
+<ol>
+<li>EnterDocument<ol>
+<li>documentId, string</li>
+</ol>
+</li>
+<li>LeaveDocument<ol>
+<li>documentId, string</li>
+</ol>
+</li>
+<li>Edit<ol>
+<li>documentId, string</li>
+<li>changeset, Changeset</li>
+</ol>
+</li>
+<li>FetchVersions<ol>
+<li>documentId</li>
+<li>versions, Set\&lt;Number></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>server -&gt; client</p>
+<ol>
+<li>RejectEnter<ol>
+<li>documentId, string</li>
+</ol>
+</li>
+<li>InitialDocument<ol>
+<li>documentId, string</li>
+<li>changesets, Changeset[]</li>
+</ol>
+</li>
+<li>OthersEdit<ol>
+<li>documentId, string</li>
+<li>changeset, Changeset</li>
+</ol>
+</li>
+<li>EditACK<ol>
+<li>documentId, string</li>
+<li>version, number</li>
+</ol>
+</li>
+<li>PushVersions<ol>
+<li>documentId, string</li>
+<li>changesets, Set\&lt;Changeset></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="CRDT"><a href="#CRDT" class="headerlink" title="CRDT"></a>CRDT</h2><ul>
+<li>CRDT的定义以及应用</li>
+</ul>
+<h2 id="OT与CRDT的区别于联系"><a href="#OT与CRDT的区别于联系" class="headerlink" title="OT与CRDT的区别于联系"></a>OT与CRDT的区别于联系</h2><h2 id="与业务结合的思考和展望"><a href="#与业务结合的思考和展望" class="headerlink" title="与业务结合的思考和展望"></a>与业务结合的思考和展望</h2></section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#算法" >
+    <span class="tag-code">算法</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2018/06/26/2018-06-26/">
+        <span class="nav-arrow">← </span>
+        
+          如何优雅的提交Git Commit Message
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- Gitment START -->
+      <div id="comments"></div>
+      <!-- Gitment END -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#协同文档的技术实现"><span class="toc-nav-text">协同文档的技术实现</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#OT算法"><span class="toc-nav-text">OT算法</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#实时协同编辑的概念和原理"><span class="toc-nav-text">实时协同编辑的概念和原理</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#How-does-Operational-Transformation-work"><span class="toc-nav-text">How does Operational Transformation work?</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Changeset"><span class="toc-nav-text">Changeset</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#Follow"><span class="toc-nav-text">Follow</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#链式反应法则"><span class="toc-nav-text">链式反应法则</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#客户端的行为定义"><span class="toc-nav-text">客户端的行为定义</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#服务端的行为定义"><span class="toc-nav-text">服务端的行为定义</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#接口和模块定义"><span class="toc-nav-text">接口和模块定义</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-4"><a class="toc-nav-link" href="#公共"><span class="toc-nav-text">公共</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#客户端"><span class="toc-nav-text">客户端</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#服务端"><span class="toc-nav-text">服务端</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#客户端和服务端消息结构"><span class="toc-nav-text">客户端和服务端消息结构</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#CRDT"><span class="toc-nav-text">CRDT</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#OT与CRDT的区别于联系"><span class="toc-nav-text">OT与CRDT的区别于联系</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#与业务结合的思考和展望"><span class="toc-nav-text">与业务结合的思考和展望</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://dekura.github.io/2018/06/26/2018-07-03/';
+    var banner = 'http://osmisz4zw.bkt.clouddn.com/15306234721863.png'
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+        
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+
+    // gitment
+    var gitmentConfig = "dekura";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "协作文档的算法实现",
+        owner: "dekura",
+        repo: "dekura.github.io",
+        oauth: {
+          client_id: "97e1d6e9653a91635905",
+          client_secret: "97ec9074518f7f02d092d022183c6ba6effbb2c1"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2018 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
