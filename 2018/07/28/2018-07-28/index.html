@@ -149,25 +149,12 @@
   <article class="post-article">
     <section class="markdown-content"><p><img src="http://osmisz4zw.bkt.clouddn.com/2018-07-28-15327710242381.jpg" alt=""></p>
 <p>generator函数与async函数的点点滴滴</p>
-<!--more--
-
-
-# generator函数与async函数
-
-## generator函数
-
-Generator 函数是 ES6 提供的一种异步编程解决方案，语法行为与传统函数完全不同。
-Generator 函数有多种理解角度。语法上，首先可以把它理解成，Generator 函数是一个状态机，封装了多个内部状态。
-
-执行 Generator 函数会返回一个遍历器对象，也就是说，Generator 函数除了状态机，还是一个遍历器对象生成函数。返回的遍历器对象，可以依次遍历 Generator 函数内部的每一个状态。
-
-形式上，Generator 函数是一个普通函数，但是有两个特征。一是，function关键字与函数名之间有一个星号；二是，函数体内部使用yield表达式，定义不同的内部状态（yield在英语里的意思就是“产出”）。
-
-基本概念可以见阮一峰[es6](http://es6.ruanyifeng.com/#docs/generator-async)
-
-异步任务的封装
-下面看看如何使用 Generator 函数，执行一个真实的异步任务。
-
+<a id="more"></a>
+<h1 id="generator函数与async函数"><a href="#generator函数与async函数" class="headerlink" title="generator函数与async函数"></a>generator函数与async函数</h1><h2 id="generator函数"><a href="#generator函数" class="headerlink" title="generator函数"></a>generator函数</h2><p>Generator 函数是 ES6 提供的一种异步编程解决方案，语法行为与传统函数完全不同。<br>Generator 函数有多种理解角度。语法上，首先可以把它理解成，Generator 函数是一个状态机，封装了多个内部状态。</p>
+<p>执行 Generator 函数会返回一个遍历器对象，也就是说，Generator 函数除了状态机，还是一个遍历器对象生成函数。返回的遍历器对象，可以依次遍历 Generator 函数内部的每一个状态。</p>
+<p>形式上，Generator 函数是一个普通函数，但是有两个特征。一是，function关键字与函数名之间有一个星号；二是，函数体内部使用yield表达式，定义不同的内部状态（yield在英语里的意思就是“产出”）。</p>
+<p>基本概念可以见阮一峰<a href="http://es6.ruanyifeng.com/#docs/generator-async" target="_blank" rel="noopener">es6</a></p>
+<p>异步任务的封装<br>下面看看如何使用 Generator 函数，执行一个真实的异步任务。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fetch = <span class="built_in">require</span>(<span class="string">'node-fetch'</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">gen</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> url = <span class="string">'https://api.github.com/users/github'</span>;</span><br><span class="line">  <span class="keyword">var</span> result = <span class="keyword">yield</span> fetch(url);</span><br><span class="line">  <span class="built_in">console</span>.log(result.bio);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>上面代码中，Generator 函数封装了一个异步操作，该操作先读取一个远程接口，然后从 JSON 格式的数据解析信息。就像前面说过的，这段代码非常像同步操作，除了加上了yield命令。</p>
 <p>执行这段代码的方法如下。</p>
@@ -197,7 +184,7 @@ Generator 函数有多种理解角度。语法上，首先可以把它理解成�
  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">dbFuc</span>(<span class="params">db</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> docs = [&#123;&#125;, &#123;&#125;, &#123;&#125;];</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> doc <span class="keyword">of</span> docs) &#123;</span><br><span class="line">    <span class="keyword">await</span> db.post(doc);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>如果确实希望多个请求并发执行，可以使用 Promise.all 方法。</p>
  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">dbFuc</span>(<span class="params">db</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> docs = [&#123;&#125;, &#123;&#125;, &#123;&#125;];</span><br><span class="line">  <span class="keyword">let</span> promises = docs.map((doc) = db.post(doc));</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> results = <span class="keyword">await</span> <span class="built_in">Promise</span>.all(promises);</span><br><span class="line">  <span class="built_in">console</span>.log(results);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或者使用下面的写法</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">dbFuc</span>(<span class="params">db</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> docs = [&#123;&#125;, &#123;&#125;, &#123;&#125;];</span><br><span class="line">  <span class="keyword">let</span> promises = docs.map((doc) = db.post(doc));</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> results = [];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> promise <span class="keyword">of</span> promises) &#123;</span><br><span class="line">    results.push(<span class="keyword">await</span> promise);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">console</span>.log(results);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
---></section>
+</section>
     <!-- Tags START -->
     
       <div class="tags">
@@ -267,7 +254,7 @@ Generator 函数有多种理解角度。语法上，首先可以把它理解成�
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="nav">none</ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#generator函数与async函数"><span class="toc-nav-text">generator函数与async函数</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#generator函数"><span class="toc-nav-text">generator函数</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#async"><span class="toc-nav-text">async</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#async-函数的优点"><span class="toc-nav-text">async 函数的优点</span></a></li></ol></li></ol></li></ol>
     
   </div>
 </aside>
