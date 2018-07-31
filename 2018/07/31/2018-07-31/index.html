@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Dekura&#39;s Blog">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      负载均衡调度算法大全 | Dekura
+    
+  </title>
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/plugins/gitment.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script>
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+</head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Dekura</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>负载均衡调度算法大全</h2>
+  <p class="post-date">2018-07-31</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p><img src="http://osmisz4zw.bkt.clouddn.com/2018-07-31-15330291141671.jpg" alt=""></p>
+<p>面试中被问到负载均衡的调度算法，这里进行整理。</p>
+<a id="more"></a>
+<h1 id="负载均衡调度算法大全"><a href="#负载均衡调度算法大全" class="headerlink" title="负载均衡调度算法大全"></a>负载均衡调度算法大全</h1><h2 id="轮循-Round-Robin"><a href="#轮循-Round-Robin" class="headerlink" title="轮循(Round Robin)"></a>轮循(Round Robin)</h2><p>这种方法会将收到的请求循环分配到服务器集群中的每台机器，即有效服务器。如果使用这种方式，所有的标记进入虚拟服务的服务器应该有相近的资源容量以及负载形同的应用程序。如果所有的服务器有相同或者相近的性能那么选择这种方式会使服务器负载形同。基于这个前提，轮循调度是一个简单而有效的分配请求的方式。然而对于服务器不同的情况，选择这种方式就意味着能力比较弱的服务器也会在下一轮循环中接受轮循，即使这个服务器已经不能再处理当前这个请求了。这可能导致能力较弱的服务器超载。</p>
+<h2 id="加权轮循-Weighted-Round-Robin"><a href="#加权轮循-Weighted-Round-Robin" class="headerlink" title="加权轮循(Weighted Round Robin)"></a>加权轮循(Weighted Round Robin)</h2><p>这种算法解决了简单轮循调度算法的缺点：传入的请求按顺序被分配到集群中服务器，但是会考虑提前为每台服务器分配的权重。管理员只是简单的通过服务器的处理能力来定义各台服务器的权重。例如，能力最强的服务器A给的权重是100，同时能力最低的服务器给的权重是50。这意味着在服务器B接收到第一个请求之前前，服务器A会连续的接受到2个请求，以此类推。</p>
+<h2 id="最少连接数-Least-Connection"><a href="#最少连接数-Least-Connection" class="headerlink" title="最少连接数(Least Connection)"></a>最少连接数(Least Connection)</h2><p>以上两种方法都没有考虑的是系统不能识别在给定的时间里保持了多少连接。因此可能发生，服务器B服务器收到的连接比服务器A少但是它已经超载，因为服务器B上的用户打开连接持续的时间更长。这就是说连接数即服务器的负载是累加的。这种潜在的问题可以通过“最少连接数”算法来避免：传入的请求是根据每台服务器当前所打开的连接数来分配的。即活跃连接数最少的服务器会自动接收下一个传入的请求。接本上和简单轮询的原则相同：所有拥有虚拟服务的服务器资源容量应该相近。值得注意的是，在流量率低的配置环境中，各服务器的流量并不是相同的，会优先考虑第一台服务器。这是因为，如果所有的服务器是相同的，那么第一个服务器优先，直到第一台服务器有连续的活跃流量，否则总是会优先选择第一台服务器。</p>
+<h2 id="最少连接数慢启动时间-Least-Connection-Slow-Start-Time"><a href="#最少连接数慢启动时间-Least-Connection-Slow-Start-Time" class="headerlink" title="最少连接数慢启动时间(Least Connection Slow Start Time)"></a>最少连接数慢启动时间(Least Connection Slow Start Time)</h2><p>对最少连接数和带权重的最小连接数调度方法来说，当一个服务器刚加入线上环境是，可以为其配置一个时间段，在这段时间内连接数是有限制的而且是缓慢增加的。这为服务器提供了一个‘过渡时间’以保证这个服务器不会因为刚启动后因为分配的连接数过多而超载。这个值在L7配置界面设置。</p>
+<h2 id="加权最少连接-Weighted-Least-Connection"><a href="#加权最少连接-Weighted-Least-Connection" class="headerlink" title="加权最少连接(Weighted Least Connection)"></a>加权最少连接(Weighted Least Connection)</h2><p>如果服务器的资源容量各不相同，那么“加权最少连接”方法更合适：由管理员根据服务器情况定制的权重所决定的活跃连接数一般提供了一种对服务器非常平衡的利用，因为他它借鉴了最少连接和权重两者的优势。通常，这是一个非常公平的分配方式，因为它使用了连接数和服务器权重比例;集群中比例最低的服务器自动接收下一个请求。但是请注意，在低流量情况中使用这种方法时，请参考“最小连接数”方法中的注意事项。</p>
+<h2 id="基于代理的自适应负载均衡-Agent-Based-Adaptive-Balancing"><a href="#基于代理的自适应负载均衡-Agent-Based-Adaptive-Balancing" class="headerlink" title="基于代理的自适应负载均衡(Agent Based Adaptive Balancing)"></a>基于代理的自适应负载均衡(Agent Based Adaptive Balancing)</h2><p>除了上述方法之外，负载主机包含一个自适用逻辑用来定时监测服务器状态和该服务器的权重。对于非常强大的“基于代理的自适应负载均衡”方法来说，负载主机以这种方式来定时检测所有服务器负载情况：每台服务器都必须提供一个包含文件，这个文件包含一个0~99的数字用来标明改服务器的实际负载情况(0=空前，99=超载，101=失败，102=管理员禁用)，而服务器同构http get方法来获取这个文件;同时对集群中服务器来说，以二进制文件形式提供自身负载情况也是该服务器工作之一，然而，并没有限制服务器如何计算自身的负载情况。根据服务器整体负载情况，有两种策略可以选择：在常规的操作中，调度算法通过收集的服务器负载值和分配给该服务器的连接数的比例计算出一个权重比例。因此，如果一个服务器负载过大，权重会通过系统透明的作重新调整。和加权轮循调度方法一样，不正确的分配可以被记录下来使得可以有效的为不同服务器分配不同的权重。然而，在流量非常低的环境下，服务器报上来的负载值将不能建立一个有代表性的样本;那么基于这些值来分配负载的话将导致失控以及指令震荡。因此，在这种情况下更合理的做法是基于静态的权重比来计算负载分配。当所有服务器的负载低于管理员定义的下限时，负载主机就会自动切换为加权轮循方式来分配请求;如果负载大于管理员定义的下限，那么负载主机又会切换回自适应方式。</p>
+<h2 id="固定权重-Fixed-Weighted"><a href="#固定权重-Fixed-Weighted" class="headerlink" title="固定权重(Fixed Weighted)"></a>固定权重(Fixed Weighted)</h2><p>最高权重只有在其他服务器的权重值都很低时才使用。然而，如果最高权重的服务器下降，则下一个最高优先级的服务器将为客户端服务。这种方式中每个真实服务器的权重需要基于服务器优先级来配置。</p>
+<h2 id="加权响应-Weighted-Response"><a href="#加权响应-Weighted-Response" class="headerlink" title="加权响应(Weighted Response)"></a>加权响应(Weighted Response)</h2><p>流量的调度是通过加权轮循方式。加权轮循中所使用的权重是根据服务器有效性检测的响应时间来计算。每个有效性检测都会被计时，用来标记它响应成功花了多长时间。但是需要注意的是，这种方式假定服务器心跳检测是基于机器的快慢，但是这种假设也许不总是能够成立。所有服务器在虚拟服务上的响应时间的总和加在一起，通过这个值来计算单个服务物理服务器的权重;这个权重值大约每15秒计算一次。</p>
+<h2 id="源IP哈希-Source-IP-Hash"><a href="#源IP哈希-Source-IP-Hash" class="headerlink" title="源IP哈希(Source IP Hash)"></a>源IP哈希(Source IP Hash)</h2><p>这种方式通过生成请求源IP的哈希值，并通过这个哈希值来找到正确的真实服务器。这意味着对于同一主机来说他对应的服务器总是相同。使用这种方式，你不需要保存任何源IP。但是需要注意，这种方式可能导致服务器负载不平衡。</p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#后端" >
+    <span class="tag-code">后端</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2018/07/28/2018-07-28/">
+        <span class="nav-arrow">← </span>
+        
+          generator函数与async函数
+        
+      </a>
+    
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- Gitment START -->
+      <div id="comments"></div>
+      <!-- Gitment END -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#负载均衡调度算法大全"><span class="toc-nav-text">负载均衡调度算法大全</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#轮循-Round-Robin"><span class="toc-nav-text">轮循(Round Robin)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#加权轮循-Weighted-Round-Robin"><span class="toc-nav-text">加权轮循(Weighted Round Robin)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#最少连接数-Least-Connection"><span class="toc-nav-text">最少连接数(Least Connection)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#最少连接数慢启动时间-Least-Connection-Slow-Start-Time"><span class="toc-nav-text">最少连接数慢启动时间(Least Connection Slow Start Time)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#加权最少连接-Weighted-Least-Connection"><span class="toc-nav-text">加权最少连接(Weighted Least Connection)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#基于代理的自适应负载均衡-Agent-Based-Adaptive-Balancing"><span class="toc-nav-text">基于代理的自适应负载均衡(Agent Based Adaptive Balancing)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#固定权重-Fixed-Weighted"><span class="toc-nav-text">固定权重(Fixed Weighted)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#加权响应-Weighted-Response"><span class="toc-nav-text">加权响应(Weighted Response)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#源IP哈希-Source-IP-Hash"><span class="toc-nav-text">源IP哈希(Source IP Hash)</span></a></li></ol></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'https://dekura.github.io/2018/07/31/2018-07-31/';
+    var banner = 'http://osmisz4zw.bkt.clouddn.com/2018-07-31-15330292202864.jpg'
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== 'http://file.muyutech.com/error-img.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+        
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+
+    // qrcode
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+
+    // gitment
+    var gitmentConfig = "dekura";
+    if (gitmentConfig !== 'undefined') {
+      var gitment = new Gitment({
+        id: "负载均衡调度算法大全",
+        owner: "dekura",
+        repo: "dekura.github.io",
+        oauth: {
+          client_id: "97e1d6e9653a91635905",
+          client_secret: "97ec9074518f7f02d092d022183c6ba6effbb2c1"
+        },
+        theme: {
+          render(state, instance) {
+            const container = document.createElement('div')
+            container.lang = "en-US"
+            container.className = 'gitment-container gitment-root-container'
+            container.appendChild(instance.renderHeader(state, instance))
+            container.appendChild(instance.renderEditor(state, instance))
+            container.appendChild(instance.renderComments(state, instance))
+            container.appendChild(instance.renderFooter(state, instance))
+            return container;
+          }
+        }
+      })
+      gitment.render(document.getElementById('comments'))
+    }
+  })();
+</script>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2018 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a href="https://github.com/yanm1ng">yanm1ng</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+  </body>
+</html>
