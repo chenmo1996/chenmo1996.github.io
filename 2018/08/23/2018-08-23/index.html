@@ -148,7 +148,8 @@
   <!-- Article START -->
   <article class="post-article">
     <section class="markdown-content"><p><img src="http://osmisz4zw.bkt.clouddn.com/2018-08-23-15350104764502.jpg" alt=""></p>
-<p>hybird的缓存策略</p>
+<p style="color:red; font-size: 40px">hybird的缓存策略</p>
+
 <a id="more"></a>
 <h1 id="一、背景"><a href="#一、背景" class="headerlink" title="一、背景"></a>一、背景</h1><p>现在的App开发，或多或少都会用到Hybrid模式，到了WebView这边，经常会加载一些js文件（例如和WebView用来Native通信的bridge.js），而这些js文件不会经常发生变化，所以我们希望js在WebView里面加载一次之后，如果js没有发生变化，下次就不用再发起网络请求去加载，从而减少流量和资源的占用。那么有什么方式可以达到这个目的呢？先得从WebView的缓存原理入手。</p>
 <h1 id="二、WebView的缓存类型"><a href="#二、WebView的缓存类型" class="headerlink" title="二、WebView的缓存类型"></a>二、WebView的缓存类型</h1><p>WebView主要包括两类缓存，<strong>一类是浏览器自带的网页数据缓存</strong>，这是所有的浏览器都支持的、由HTTP协议定义的缓存；<strong>另一类是H5缓存</strong>，这是由web页面的开发者设置的，H5缓存主要包括了App Cache、DOM Storage、Local Storage、Web SQL Database 存储机制等，这里我们主要介绍App Cache来缓存js文件。</p>
@@ -327,6 +328,13 @@
         
       </a>
     
+    
+      <a class="nav-right" href="/2018/09/15/2018-09-15/">
+        
+          内存管理
+        
+        <span class="nav-arrow"> →</span>
+      </a>
     
   </div>
 
