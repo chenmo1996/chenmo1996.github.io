@@ -10,7 +10,7 @@
   
   <title>
     
-      WebSocket 教程 | Dekura
+      用记录来对抗平庸 | Dekura
     
   </title>
   <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -138,8 +138,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>WebSocket 教程</h2>
-  <p class="post-date">2018-03-15</p>
+  <h2>用记录来对抗平庸</h2>
+  <p class="post-date">2018-09-26</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -147,44 +147,22 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p>转自<a href="http://www.ruanyifeng.com/blog/2017/05/websocket.html" target="_blank" rel="noopener">阮一峰</a><br><img src="http://osmisz4zw.bkt.clouddn.com/15211240966519.jpg" alt=""></p>
+    <section class="markdown-content"><p><img src="http://osmisz4zw.bkt.clouddn.com/2018-09-27-15380405735941.jpg" alt=""></p>
+<p>时代与浪潮</p>
 <a id="more"></a>
-<h1 id="WebSocket简明教程"><a href="#WebSocket简明教程" class="headerlink" title="WebSocket简明教程"></a>WebSocket简明教程</h1><p>一、为什么需要 WebSocket？</p>
-<p>为了避免轮询的资源浪费和单向请求的弱点。</p>
-<p>二、简介</p>
-<p>WebSocket 协议在2008年诞生，2011年成为国际标准。所有浏览器都已经支持了。</p>
-<p>它的最大特点就是，服务器可以主动向客户端推送信息，客户端也可以主动向服务器发送信息，是真正的双向平等对话，属于服务器推送技术的一种。</p>
-<p>其他特点包括：</p>
-<p>（1）建立在 TCP 协议之上，服务器端的实现比较容易。</p>
-<p>（2）与 HTTP 协议有着良好的兼容性。默认端口也是80和443，并且握手阶段采用 HTTP 协议，因此握手时不容易屏蔽，能通过各种 HTTP 代理服务器。</p>
-<p>（3）数据格式比较轻量，性能开销小，通信高效。</p>
-<p>（4）可以发送文本，也可以发送二进制数据。</p>
-<p>（5）没有同源限制，客户端可以与任意服务器通信。</p>
-<p>（6）协议标识符是ws（如果加密，则为wss），服务器网址就是 URL。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ws://example.com:80/some/path</span><br></pre></td></tr></table></figure>
-<p><img src="http://osmisz4zw.bkt.clouddn.com/15213371487538.jpg" alt=""></p>
-<p>三、客户端的简单示例</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用回调函数解决所有问题</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> ws = <span class="keyword">new</span> WebSocket(<span class="string">"wss://echo.websocket.org"</span>);</span><br><span class="line"></span><br><span class="line">ws.onopen = <span class="function"><span class="keyword">function</span>(<span class="params">evt</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'connection open ...'</span>);</span><br><span class="line">    ws.send(<span class="string">"hello websockets"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ws.onmessage = <span class="function"><span class="keyword">function</span>(<span class="params">evt</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'received message: '</span>+evt.data);</span><br><span class="line">    ws.close();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ws.onclose = <span class="function"><span class="keyword">function</span>(<span class="params">evt</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'connect closed'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="风口理论"><a href="#风口理论" class="headerlink" title="风口理论"></a>风口理论</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>今天看了很多东西，心情也是十分的烦躁。</p>
+<p>一篇文章是<a href="https://mp.weixin.qq.com/s/DpS2MGIyQTCwat3T5pqECA" target="_blank" rel="noopener">移动互联网的十年</a>,文章细数自乔布斯reinvent iphone十年来的各种风云人物。</p>
+<p>给我留下来的印象就是，成功需要<strong>赌对了中国大时代的脉搏</strong>，<strong>成功一定要顺势而为</strong>，势高于个人努力。</p>
+<p>一个部分是看巨人里，肯尼阿卡曼临终前的话：“所有人都是某些东西的奴隶”，那么我悲哀的是，我连自己是什么东西的奴隶哦度不知道。</p>
+<p>我的人生价值观导向再一次出现了迷失。</p>
 </section>
     <!-- Tags START -->
     
       <div class="tags">
         <span>Tags:</span>
         
-  <a href="/tags#面试准备" >
-    <span class="tag-code">面试准备</span>
-  </a>
-
-  <a href="/tags#技术分享" >
-    <span class="tag-code">技术分享</span>
-  </a>
-
-  <a href="/tags#语言基础" >
-    <span class="tag-code">语言基础</span>
-  </a>
-
-  <a href="/tags#框架原理" >
-    <span class="tag-code">框架原理</span>
+  <a href="/tags#日记" >
+    <span class="tag-code">日记</span>
   </a>
 
       </div>
@@ -195,20 +173,13 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2018/03/15/2018-03-15/">
+      <a class="nav-left" href="/2018/09/25/2018-09-25/">
         <span class="nav-arrow">← </span>
         
-          IndexedDB概述
+          用记录来对抗平庸
         
       </a>
     
-    
-      <a class="nav-right" href="/2018/03/18/2018-03-18/">
-        
-          web-worker
-        
-        <span class="nav-arrow"> →</span>
-      </a>
     
   </div>
 
@@ -254,7 +225,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#WebSocket简明教程"><span class="toc-nav-text">WebSocket简明教程</span></a></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#风口理论"><span class="toc-nav-text">风口理论</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#前言"><span class="toc-nav-text">前言</span></a></li></ol></li></ol>
     
   </div>
 </aside>
@@ -264,8 +235,8 @@
 
 <script>
   (function () {
-    var url = 'https://dekura.github.io/2018/03/15/2018-03-15-1/';
-    var banner = ''
+    var url = 'https://dekura.github.io/2018/09/26/2018-09-26/';
+    var banner = 'http://osmisz4zw.bkt.clouddn.com/2018-08-23-15350105125479.jpg'
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
         'background-image': 'url(' + banner + ')'
@@ -320,7 +291,7 @@
     var gitmentConfig = "dekura";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
-        id: "WebSocket 教程",
+        id: "用记录来对抗平庸",
         owner: "dekura",
         repo: "dekura.github.io",
         oauth: {
