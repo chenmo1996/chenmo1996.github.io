@@ -10,7 +10,7 @@
   
   <title>
     
-      HTML5 离线存储--manifest简介 | Dekura
+      人生就在柳暗花明处 | Dekura
     
   </title>
   <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -138,8 +138,8 @@
 </header>
 
     <div id="article-banner">
-  <h2>HTML5 离线存储--manifest简介</h2>
-  <p class="post-date">2018-03-20</p>
+  <h2>人生就在柳暗花明处</h2>
+  <p class="post-date">2018-10-12</p>
   <div class="arrow-down">
     <a href="javascript:;"></a>
   </div>
@@ -147,54 +147,26 @@
 <main class="app-body flex-box">
   <!-- Article START -->
   <article class="post-article">
-    <section class="markdown-content"><p>HTML5离线存储——manifest简介</p>
-<p><img src="http://osmisz4zw.bkt.clouddn.com/15217058281555.jpg" alt=""><br><a id="more"></a></p>
-<h1 id="HTML5-离线存储–manifest简介"><a href="#HTML5-离线存储–manifest简介" class="headerlink" title="HTML5 离线存储–manifest简介"></a>HTML5 离线存储–manifest简介</h1><h2 id="离线存储的作用"><a href="#离线存储的作用" class="headerlink" title="离线存储的作用"></a>离线存储的作用</h2><p>1、用户可离线访问应用，这对于无法随时保持联网状态的移动终端用户来说尤其重要</p>
-<p>2、用户访问本地的缓存文件，通常意味着更快的访问速度</p>
-<p>3、仅仅加载被修改过的资源，避免同一资源对服务器多次的请求，大大降低了对服务器的访问压力</p>
-<h2 id="Manifest是什么"><a href="#Manifest是什么" class="headerlink" title="Manifest是什么"></a>Manifest是什么</h2><p>manifest文件是简单的文本文件，它告知浏览器被缓存的内容（以及不缓存的内容），支持manifest的浏览器，会将按照manifest文件的规则，将文件保存在本地，从而在没有网络链接的情况下，也能访问页面。</p>
-<h2 id="浏览器支持情况"><a href="#浏览器支持情况" class="headerlink" title="浏览器支持情况"></a>浏览器支持情况</h2><p><img src="http://7tszky.com1.z0.glb.clouddn.com/Fn7F_siZ7NPA3eJ7Z-CICBhzwPTV" alt="img"></p>
-<p>从图中可以看出主流浏览器均支持应用程序缓存， 除了IE</p>
-<h2 id="如何用"><a href="#如何用" class="headerlink" title="如何用"></a>如何用</h2><p>如需启用应用程序缓存，在文档的 <html> 标签中包含 manifest 属性：</html></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE HTML&gt;</span><br><span class="line">&lt;html manifest=&quot;demo.appcache&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">The content of the document......</span><br><span class="line">&lt;/body&gt;</span><br><span class="line"></span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+    <section class="markdown-content"><p><img src="http://osmisz4zw.bkt.clouddn.com/2018-10-12-c3645317e4db387ccbb7.jpg" alt="c3645317e4db387ccbb7"></p>
 <blockquote>
-<p>请注意，manifest 文件需要配置正确的 MIME-type，即 “text/cache-manifest”。必须在 web 服务器上进行配置。</p>
+<p>没有目标的人就容易绝处逢生</p>
 </blockquote>
-<h2 id="Manifest文件"><a href="#Manifest文件" class="headerlink" title="Manifest文件"></a>Manifest文件</h2><p>manifest的典型结构:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">CACHE MANIFEST</span><br><span class="line"># 注释：需要缓存的文件，无论在线与否，均从缓存里读取</span><br><span class="line">CACHE:</span><br><span class="line">chched.js</span><br><span class="line">cached.css</span><br><span class="line"></span><br><span class="line"># 注释：不缓存的文件，无论缓存中存在与否，均从新获取</span><br><span class="line">NETWORK:</span><br><span class="line">uncached.js</span><br><span class="line">uncached.css</span><br><span class="line"></span><br><span class="line"># 注释：获取不到资源时的备选路径，如index.html访问失败，则返回404页面</span><br><span class="line">FALLBACK:</span><br><span class="line">index.html 404.html</span><br></pre></td></tr></table></figure>
-<p>1、 CACHE MANIFEST 写在manifest文件开头</p>
-<p>2、#号开头的是注释，一般会在第二行写个版本号，用来在缓存的文件更新时，更改manifest的作用，可以是版本号，时间戳或者md5码等等。</p>
-<p>3、CACHE是必须的，作用是标识出哪些文件需要缓存，可以是相对路径也可以是绝对路径</p>
-<p>4、NETWORK可选，这一部分是要直接读取的文件，可以使用通配符 * 。</p>
-<p>5、FALLBACK可选，指定了一个后备页面，当资源无法访问时，浏览器会使用该页面。</p>
-<h2 id="更新缓存"><a href="#更新缓存" class="headerlink" title="更新缓存"></a>更新缓存</h2><p><img src="http://7tszky.com1.z0.glb.clouddn.com/Fukm5DQbG9pi_jS6PxSl3umZTfo2" alt="img"></p>
-<ul>
-<li>在线的情况下，浏览器发现html头部有manifest属性,会请求manifest文件，如果是第一次访问应用，浏览器就会根据manifest文件的内容下载相应的资源并且进行离线存储。如果已经访问过应用并且资源已经离线存储了，那么浏览器就会使用离线的资源加载页面，然后浏览器会对比新的manifest文件与旧的manifest文件，如果文件没有发生改变，就不做任何操作，如果文件改变了，那么就会重新下载文件中的资源并进行离线存储。</li>
-<li>离线的情况下，浏览器就直接使用离线存储的资源。</li>
-</ul>
-<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>1、如果服务器对离线的资源进行了更新，那么必须更新manifest文件之后这些资源才能被浏览器重新下载，如果只是更新了资源而没有更新manifest文件的话，浏览器并不会重新下载资源，也就是说还是使用原来离线存储的资源。</p>
-<p>2、对于manifest文件进行缓存的时候需要十分小心，因为可能出现一种情况就是你对manifest文件进行了更新，但是http的缓存规则告诉浏览器本地缓存的manifest文件还没过期，这个情况下浏览器还是使用原来的manifest文件，所以对于manifest文件最好不要设置缓存。</p>
-<p>3、浏览器在下载manifest文件中的资源的时候，它会一次性下载所有资源，如果某个资源由于某种原因下载失败，那么这次的所有更新就算是失败的，浏览器还是会使用原来的资源。</p>
+<a id="more"></a>
+<h1 id="人生就在柳暗花明处"><a href="#人生就在柳暗花明处" class="headerlink" title="人生就在柳暗花明处"></a>人生就在柳暗花明处</h1><h2 id="近日"><a href="#近日" class="headerlink" title="近日"></a>近日</h2><ol>
+<li>在学习雅思方面确实有按照科学的方法来进行指导。无奈计划制定的还是不够完善。</li>
+<li>健身的事情耽误了</li>
+</ol>
+<h2 id="喜讯"><a href="#喜讯" class="headerlink" title="喜讯"></a>喜讯</h2><ol>
+<li>腾讯巨大offer，头条as well</li>
+</ol>
 </section>
     <!-- Tags START -->
     
       <div class="tags">
         <span>Tags:</span>
         
-  <a href="/tags#面试准备" >
-    <span class="tag-code">面试准备</span>
-  </a>
-
-  <a href="/tags#技术分享" >
-    <span class="tag-code">技术分享</span>
-  </a>
-
-  <a href="/tags#语言基础" >
-    <span class="tag-code">语言基础</span>
-  </a>
-
-  <a href="/tags#框架原理" >
-    <span class="tag-code">框架原理</span>
+  <a href="/tags#日记" >
+    <span class="tag-code">日记</span>
   </a>
 
       </div>
@@ -205,20 +177,13 @@
   <div class="nav-container">
     <!-- reverse left and right to put prev and next in a more logic postition -->
     
-      <a class="nav-left" href="/2018/03/19/2018-03-19/">
+      <a class="nav-left" href="/2018/10/06/2018-10-06/">
         <span class="nav-arrow">← </span>
         
-          详解CROS
+          计划与习惯
         
       </a>
     
-    
-      <a class="nav-right" href="/2018/03/20/2018-03-20/">
-        
-          详解强缓存和协商缓存
-        
-        <span class="nav-arrow"> →</span>
-      </a>
     
   </div>
 
@@ -264,7 +229,7 @@
   <div class="toc-main">
     <strong class="toc-title">Catalog</strong>
     
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#HTML5-离线存储–manifest简介"><span class="toc-nav-text">HTML5 离线存储–manifest简介</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#离线存储的作用"><span class="toc-nav-text">离线存储的作用</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Manifest是什么"><span class="toc-nav-text">Manifest是什么</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#浏览器支持情况"><span class="toc-nav-text">浏览器支持情况</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#如何用"><span class="toc-nav-text">如何用</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#Manifest文件"><span class="toc-nav-text">Manifest文件</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#更新缓存"><span class="toc-nav-text">更新缓存</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#注意事项"><span class="toc-nav-text">注意事项</span></a></li></ol></li></ol>
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#人生就在柳暗花明处"><span class="toc-nav-text">人生就在柳暗花明处</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#近日"><span class="toc-nav-text">近日</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#喜讯"><span class="toc-nav-text">喜讯</span></a></li></ol></li></ol>
     
   </div>
 </aside>
@@ -274,8 +239,8 @@
 
 <script>
   (function () {
-    var url = 'https://dekura.github.io/2018/03/20/2018-03-22/';
-    var banner = ''
+    var url = 'https://dekura.github.io/2018/10/12/2018-10-12/';
+    var banner = 'http://osmisz4zw.bkt.clouddn.com/2018-10-06-15388361659389.jpg'
     if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
       $('#article-banner').css({
         'background-image': 'url(' + banner + ')'
@@ -330,7 +295,7 @@
     var gitmentConfig = "dekura";
     if (gitmentConfig !== 'undefined') {
       var gitment = new Gitment({
-        id: "HTML5 离线存储--manifest简介",
+        id: "人生就在柳暗花明处",
         owner: "dekura",
         repo: "dekura.github.io",
         oauth: {
